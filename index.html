@@ -190,6 +190,9 @@ a { color: var(--accent); }
   color: var(--ink-soft);
   margin: 0;
 }
+.about-text p.about-line-two {
+  margin-top: 18px;
+}
 .about-photo { flex: 0.85; }
 .about-photo img,
 .about-photo .placeholder {
@@ -300,16 +303,18 @@ a { color: var(--accent); }
 }
 
 .snapshots {
-  display: flex;
-  gap: 14px;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
   margin-top: 26px;
-  flex-wrap: wrap;
+  max-width: 460px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .snapshot {
-  width: 96px;
-  height: 96px;
+  width: 100%;
+  aspect-ratio: 1 / 1;
   background: #fff;
   padding: 6px 6px 16px;
   box-shadow: 0 10px 20px -10px rgba(23,23,23,0.35);
@@ -326,6 +331,14 @@ a { color: var(--accent); }
   display: block;
 }
 .snapshot img[data-missing] { display: none; }
+
+@media (max-width: 560px) {
+  .snapshots {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 220px;
+    gap: 18px;
+  }
+}
 
 /* ============ QUENTALK ============ */
 .quentalk-heading {
@@ -650,7 +663,8 @@ footer {
       <svg class="paperclip" viewBox="0 0 34 58" fill="none"><path d="M9 14V42a8 8 0 0 0 16 0V10a5 5 0 0 0-10 0v28a2 2 0 0 0 4 0V16" stroke="var(--clip)" stroke-width="4.5" stroke-linecap="round"/></svg>
       <div class="about-grid">
         <div class="about-text">
-          <p>Hello, world! I'm Quenifer, and I love thinking in diagrams. Everything in life is interconnected, even when those connections are hard to see. Turning messy thoughts into simple visual systems has helped me solve problems in my personal life and my career.</p>
+          <p>Hello, world! I'm Quenifer, and I love thinking in diagrams. Everything in life is connected, even when those connections are hard to see.</p>
+          <p class="about-line-two">Turning messy thoughts into simple visual systems has helped me solve problems in my personal life, my career, and everything in between.</p>
         </div>
         <div class="about-photo">
           <img src="assets/quenifer-portrait.jpeg" alt="Quenifer" onerror="this.outerHTML='<div class=&quot;placeholder&quot;>your portrait goes here</div>'">
@@ -692,7 +706,7 @@ footer {
       <svg class="paperclip" viewBox="0 0 34 58" fill="none"><path d="M9 14V42a8 8 0 0 0 16 0V10a5 5 0 0 0-10 0v28a2 2 0 0 0 4 0V16" stroke="var(--clip)" stroke-width="4.5" stroke-linecap="round"/></svg>
       <h2 class="mission-heading">I want to help people</h2>
       <span class="funny-line">I'm not a fairy godmother, but I do have ADHD and a habit of turning everything into a diagram.</span>
-      <p>These mini systems started as a way to organize my own thoughts. Now, they guide the stories and ideas I share as we navigate this big, beautiful life together.</p>
+      <p>These mini systems started as a way to organize my own thoughts. And I hope it helps you too as we navigate this big, beautiful life together.</p>
 
       <div class="snapshots">
         <div class="snapshot"><img src="assets/quenifer-hike.jpeg" alt="" onerror="this.setAttribute('data-missing','')"></div>
@@ -707,7 +721,7 @@ footer {
   <div class="quentalk-heading">
     <h2>QuenTalk</h2>
     <p>A new series where I try to untangle your problems for you.</p>
-    <p class="quentalk-invite">Tell me your biggest problem. I'll turn it into a diagram, framework, or system that might help us see it differently.</p>
+    <p class="quentalk-invite">Tell me your biggest problem. I will turn it into a framework that might help us see it differently.</p>
   </div>
 
   <div class="form-wrap">
