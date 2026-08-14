@@ -284,87 +284,72 @@
 
   .thankyou.show { display: block; }
 
-  .plane-scene {
-    width: 160px;
-    height: 120px;
-    margin: 0 auto 20px;
+  .envelope-scene {
+    width: 140px;
+    height: 100px;
+    margin: 0 auto 28px;
     position: relative;
+  }
+
+  .envelope {
+    position: absolute;
+    inset: 0;
+    border-radius: 10px;
+    background: #fdfcfa;
+    border: 1.5px solid rgba(23,23,23,0.14);
+    box-shadow: 0 14px 30px -12px rgba(23,23,23,0.25);
     overflow: visible;
   }
 
-  .plane {
+  .flap {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 52px;
+    background: #f3f1ec;
+    border: 1.5px solid rgba(23,23,23,0.14);
+    border-bottom: none;
+    clip-path: polygon(0 0, 50% 62%, 100% 0);
+    transform-origin: top center;
+    animation: closeFlap 0.9s ease forwards 0.3s;
+  }
+
+  @keyframes closeFlap {
+    0% { transform: rotateX(180deg); }
+    100% { transform: rotateX(0deg); }
+  }
+
+  .stamp {
     position: absolute;
     left: 50%;
-    top: 60%;
-    width: 70px;
-    height: 70px;
-    transform: translate(-50%, -50%) rotate(-8deg);
-    animation: flyOff 1.1s cubic-bezier(.5,0,.75,0) forwards 0.35s;
+    top: 50%;
+    width: 28px;
+    height: 28px;
+    transform: translate(-50%, -50%) scale(0);
+    background: var(--coral);
+    border-radius: 50%;
+    display: grid;
+    place-content: center;
+    animation: popStamp 0.4s cubic-bezier(.34,1.56,.64,1) forwards 1.15s;
   }
 
-  .plane svg { width: 100%; height: 100%; display: block; }
-
-  @keyframes flyOff {
-    0% { transform: translate(-50%, -50%) rotate(-8deg) scale(1); opacity: 1; }
-    70% { opacity: 1; }
-    100% { transform: translate(120px, -140px) rotate(18deg) scale(0.5); opacity: 0; }
+  @keyframes popStamp {
+    to { transform: translate(-50%, -50%) scale(1); }
   }
 
-  .plane-trail {
-    position: absolute;
-    left: 46%;
-    top: 58%;
-    width: 2px;
-    height: 2px;
-    border-top: 1.5px dashed rgba(23,23,23,0.25);
-    width: 0;
-    animation: growTrail 1s ease forwards 0.35s;
-  }
-
-  @keyframes growTrail {
-    0% { width: 0; opacity: 1; }
-    100% { width: 100px; opacity: 0; }
-  }
+  .stamp svg { width: 15px; height: 15px; }
 
   .thankyou h2 {
     font-family: 'Space Grotesk', sans-serif;
     font-size: 24px;
-    margin: 0 0 10px;
+    margin: 0;
     opacity: 0;
-    animation: fadeUp 0.5s ease forwards 1s;
-  }
-
-  .thankyou p {
-    color: var(--ink-soft);
-    font-size: 15px;
-    line-height: 1.5;
-    max-width: 340px;
-    margin: 0 auto 24px;
-    opacity: 0;
-    animation: fadeUp 0.5s ease forwards 1.15s;
-  }
-
-  .coffee-btn {
-    display: inline-block;
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 700;
-    font-size: 14.5px;
-    text-decoration: none;
-    color: #fff;
-    background: var(--ink);
-    padding: 13px 26px;
-    border-radius: 12px;
-    transition: transform 0.15s ease, background 0.2s ease;
-    opacity: 0;
-    animation: fadeUp 0.5s ease forwards 1.3s;
+    animation: fadeUp 0.5s ease forwards 1.6s;
   }
 
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(8px); }
     to { opacity: 1; transform: translateY(0); }
   }
-
-  .coffee-btn:hover { transform: translateY(-2px); background: #000; }
 
   /* ---------- Footer ---------- */
   footer {
@@ -425,18 +410,15 @@
       </form>
 
       <div class="thankyou" id="thankyou">
-        <div class="plane-scene">
-          <div class="plane-trail"></div>
-          <div class="plane">
-            <svg viewBox="0 0 100 100" fill="none">
-              <path d="M6 52 L94 8 L58 92 L46 60 L6 52Z" fill="#fdfcfa" stroke="rgba(23,23,23,0.18)" stroke-width="2" stroke-linejoin="round"/>
-              <path d="M46 60 L94 8 L58 92 Z" fill="#f0eee9"/>
-            </svg>
+        <div class="envelope-scene">
+          <div class="envelope">
+            <div class="flap"></div>
+            <div class="stamp">
+              <svg viewBox="0 0 32 29" fill="#fff"><path d="M16 29C16 29 0 19.5 0 9.5C0 3.5 4.5 0 9 0C12 0 14.5 1.5 16 4.5C17.5 1.5 20 0 23 0C27.5 0 32 3.5 32 9.5C32 19.5 16 29 16 29Z"/></svg>
+            </div>
           </div>
         </div>
         <h2>Sent!</h2>
-        <p>Buy me a coffee? I don't make anything off my Instagram :)</p>
-        <a href="#" class="coffee-btn">Buy me a coffee</a>
       </div>
     </div>
   </div>
