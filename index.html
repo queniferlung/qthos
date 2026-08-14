@@ -293,6 +293,30 @@
   }
   .send-error.show { display: block; }
 
+
+  /* ---------- Multi-step form ---------- */
+  .form-step {
+    display: none;
+  }
+
+  .form-step.active {
+    display: block;
+    animation: stepIn 0.28s ease;
+  }
+
+  @keyframes stepIn {
+    from { opacity: 0; transform: translateX(10px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .form-step .field {
+    margin-bottom: 0;
+  }
+
+  .form-step .next-btn {
+    margin-top: 22px;
+  }
+
   /* ---------- Post-submit state ---------- */
   .thankyou {
     display: none;
@@ -400,31 +424,39 @@
   <div class="form-wrap">
     <div class="card" id="formCard">
       <form id="quenForm" novalidate>
-        <div class="field">
-          <label for="problem">What's the biggest problem you want to solve?</label>
-          <textarea id="problem" name="problem" placeholder="e.g. I can't decide whether to take the job or stay in school..." required></textarea>
-          <p class="field-error" id="errProblem">Required</p>
+        <div class="form-step active" data-step="1">
+          <div class="field">
+            <label for="problem">What's the biggest problem you want to solve?</label>
+            <textarea id="problem" name="problem" placeholder="e.g. I can't decide whether to take the job or stay in school..." required></textarea>
+            <p class="field-error" id="errProblem">Required</p>
+          </div>
+          <button type="button" class="submit next-btn" data-next="2">Next</button>
         </div>
 
-        <div class="field">
-          <label for="tried">What have you tried so far?</label>
-          <textarea id="tried" name="tried" placeholder="e.g. I've made a list, asked a friend, weighed the pros and cons..." required></textarea>
-          <p class="field-error" id="errTried">Required</p>
+        <div class="form-step" data-step="2">
+          <div class="field">
+            <label for="tried">What have you tried so far?</label>
+            <textarea id="tried" name="tried" placeholder="e.g. I've made a list, asked a friend, weighed the pros and cons..." required></textarea>
+            <p class="field-error" id="errTried">Required</p>
+          </div>
+          <button type="button" class="submit next-btn" data-next="3">Next</button>
         </div>
 
-        <div class="field">
-          <label for="extra">Anything else you would like me to know?</label>
-          <textarea id="extra" name="extra"></textarea>
+        <div class="form-step" data-step="3">
+          <div class="field">
+            <label for="extra">Anything else you would like me to know?</label>
+            <textarea id="extra" name="extra"></textarea>
+          </div>
+
+          <label class="checkbox-field">
+            <input type="checkbox" id="consent" name="consent" required>
+            <span>I consent to this information being shared in a video, with identifying details changed.</span>
+          </label>
+          <p class="field-error" id="errConsent">Required</p>
+
+          <button type="submit" class="submit" id="submitBtn">Submit</button>
+          <p class="send-error" id="sendError">Hmm, that didn't send. Mind trying again?</p>
         </div>
-
-        <label class="checkbox-field">
-          <input type="checkbox" id="consent" name="consent" required>
-          <span>I consent to this information being shared in a video, with identifying details changed.</span>
-        </label>
-        <p class="field-error" id="errConsent">Required</p>
-
-        <button type="submit" class="submit" id="submitBtn">Submit</button>
-        <p class="send-error" id="sendError">Hmm, that didn't send. Mind trying again?</p>
       </form>
 
       <div class="thankyou" id="thankyou">
@@ -541,6 +573,39 @@
   problem.addEventListener('input', () => clearFieldError(problem, errProblem));
   tried.addEventListener('input', () => clearFieldError(tried, errTried));
   consent.addEventListener('change', () => clearFieldError(consent, errConsent));
+
+  // ---- Step-by-step form navigation ----
+  const steps = document.querySelectorAll('.form-step');
+  const nextButtons = document.querySelectorAll('.next-btn');
+
+  function showStep(stepNumber) {
+    steps.forEach(step => {
+      step.classList.toggle('active', step.dataset.step === String(stepNumber));
+    });
+  }
+
+  nextButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const currentStep = button.closest('.form-step');
+      const stepNumber = Number(currentStep.dataset.step);
+
+      if (stepNumber === 1 && !problem.value.trim()) {
+        problem.classList.add('invalid');
+        errProblem.classList.add('show');
+        problem.focus();
+        return;
+      }
+
+      if (stepNumber === 2 && !tried.value.trim()) {
+        tried.classList.add('invalid');
+        errTried.classList.add('show');
+        tried.focus();
+        return;
+      }
+
+      showStep(button.dataset.next);
+    });
+  });
 
   form.addEventListener('submit', async function(e) {
     e.preventDefault();
