@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quen Talk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fdfbf4;
+    --grid-line: #e7e5e1;
+    --ink: #171717;
+    --ink-soft: #55524d;
+    --accent: #3654A6;
+    --accent-dark: #2a4384;
+    --coral: #E8613C;
+    --mustard: #F0B429;
+    --green: #2F9E6E;
+    --pink: #E8749B;
+    --purple: #7C5CBF;
+    --card-bg: rgba(255, 255, 255, 0.16);
+    --card-border: rgba(23, 23, 23, 0.08);
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 40px 40px;
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  .page {
+    position: relative;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 24px 120px;
+  }
+
+  /* ---------- Decorative shapes ---------- */
+  .shape {
+    position: absolute;
+    display: block;
+    pointer-events: none;
+    z-index: 0;
+    will-change: transform;
+  }
+
+  .shape svg { display: block; width: 100%; height: 100%; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative;
+    padding: 90px 0 40px;
+    text-align: center;
+    z-index: 1;
+  }
+
+  .hero h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: clamp(48px, 9vw, 84px);
+    letter-spacing: -0.03em;
+    margin: 0 0 20px;
+    line-height: 1;
+  }
+
+  .hero .sub {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500;
+    font-size: clamp(11px, 3.3vw, 20px);
+    color: var(--accent);
+    max-width: 560px;
+    margin: 0 auto 14px;
+    line-height: 1.4;
+    white-space: nowrap;
+  }
+
+  .hero .body {
+    font-size: clamp(10px, 2.7vw, 16px);
+    color: var(--ink-soft);
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.55;
+    white-space: nowrap;
+  }
+
+  /* ---------- Form card ---------- */
+  .form-wrap {
+    position: relative;
+    z-index: 1;
+    margin-top: 56px;
+  }
+
+  .card {
+    position: relative;
+    background: var(--card-bg);
+    backdrop-filter: blur(36px) saturate(180%);
+    -webkit-backdrop-filter: blur(36px) saturate(180%);
+    border: 1px solid rgba(255,255,255,0.55);
+    border-radius: 28px;
+    padding: 40px 36px;
+    box-shadow:
+      0 20px 60px -20px rgba(23, 23, 23, 0.18),
+      inset 0 1px 1px rgba(255,255,255,0.8),
+      inset 0 -12px 30px -18px rgba(23,23,23,0.15);
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgba(255,255,255,0.55), rgba(255,255,255,0) 35%, rgba(255,255,255,0) 65%, rgba(255,255,255,0.2));
+    pointer-events: none;
+  }
+
+  .card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 8%; right: 8%;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,0.9), rgba(255,255,255,0));
+    pointer-events: none;
+  }
+
+  .card > * { position: relative; z-index: 1; }
+
+  @media (max-width: 560px) {
+    .card { padding: 26px 20px; border-radius: 22px; }
+    .hero { padding: 64px 0 28px; }
+    .form-wrap { margin-top: 36px; }
+    .checkbox-field input { width: 24px; height: 24px; min-width: 24px; }
+    textarea { font-size: 16px; } /* prevents iOS auto-zoom on focus */
+  }
+
+  .field { margin-bottom: 10px; }
+
+  .field label {
+    display: block;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 15.5px;
+    margin-bottom: 10px;
+  }
+
+  textarea {
+    width: 100%;
+    resize: vertical;
+    min-height: 90px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    padding: 14px 16px;
+    border-radius: 14px;
+    border: 1.5px solid rgba(23,23,23,0.14);
+    background: rgba(255,255,255,0.6);
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  }
+
+  textarea::placeholder { color: #9b978f; }
+
+  textarea:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px rgba(54, 84, 166, 0.12);
+    background: #fff;
+  }
+
+  #problem { min-height: 130px; }
+
+  .field-error {
+    font-size: 12.5px;
+    color: var(--coral);
+    font-weight: 600;
+    margin: 6px 0 20px;
+    display: none;
+  }
+
+  .field-error.show { display: block; }
+
+  textarea.invalid { border-color: var(--coral); }
+
+  .checkbox-field {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin: 24px 0 6px;
+    cursor: pointer;
+  }
+
+  .checkbox-field input {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
+    border-radius: 7px;
+    border: 1.5px solid rgba(23,23,23,0.25);
+    background: rgba(255,255,255,0.6);
+    cursor: pointer;
+    display: grid;
+    place-content: center;
+    transition: border-color 0.2s ease, background 0.2s ease;
+    margin-top: 1px;
+  }
+
+  .checkbox-field input.invalid { border-color: var(--coral); }
+
+  .checkbox-field input::before {
+    content: '';
+    width: 11px;
+    height: 11px;
+    transform: scale(0);
+    transition: transform 0.15s ease;
+    box-shadow: inset 1em 1em var(--accent);
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+  }
+
+  .checkbox-field input:checked {
+    border-color: var(--accent);
+  }
+
+  .checkbox-field input:checked::before { transform: scale(1); }
+
+  .checkbox-field span {
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    user-select: none;
+  }
+
+  button.submit {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: -0.01em;
+    color: #fff;
+    background: var(--accent);
+    border: none;
+    width: 100%;
+    padding: 16px;
+    border-radius: 14px;
+    cursor: pointer;
+    margin-top: 28px;
+    transition: transform 0.15s ease, background 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+    box-shadow: 0 8px 20px -8px rgba(54, 84, 166, 0.55);
+  }
+
+  button.submit:hover { background: var(--accent-dark); transform: translateY(-2px); }
+  button.submit:active { transform: translateY(0); }
+  button.submit:disabled { opacity: 0.6; cursor: default; transform: none; }
+
+  .send-error {
+    font-size: 13px;
+    color: var(--coral);
+    margin: 14px 0 0;
+    display: none;
+    text-align: center;
+  }
+  .send-error.show { display: block; }
+
+  /* ---------- Post-submit state ---------- */
+  .thankyou {
+    display: none;
+    text-align: center;
+    padding: 30px 10px 10px;
+  }
+
+  .thankyou.show { display: block; }
+
+  .plane-scene {
+    width: 160px;
+    height: 120px;
+    margin: 0 auto 20px;
+    position: relative;
+    overflow: visible;
+  }
+
+  .plane {
+    position: absolute;
+    left: 50%;
+    top: 60%;
+    width: 70px;
+    height: 70px;
+    transform: translate(-50%, -50%) rotate(-8deg);
+    animation: flyOff 1.1s cubic-bezier(.5,0,.75,0) forwards 0.35s;
+  }
+
+  .plane svg { width: 100%; height: 100%; display: block; }
+
+  @keyframes flyOff {
+    0% { transform: translate(-50%, -50%) rotate(-8deg) scale(1); opacity: 1; }
+    70% { opacity: 1; }
+    100% { transform: translate(120px, -140px) rotate(18deg) scale(0.5); opacity: 0; }
+  }
+
+  .plane-trail {
+    position: absolute;
+    left: 46%;
+    top: 58%;
+    width: 2px;
+    height: 2px;
+    border-top: 1.5px dashed rgba(23,23,23,0.25);
+    width: 0;
+    animation: growTrail 1s ease forwards 0.35s;
+  }
+
+  @keyframes growTrail {
+    0% { width: 0; opacity: 1; }
+    100% { width: 100px; opacity: 0; }
+  }
+
+  .thankyou h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 24px;
+    margin: 0 0 10px;
+    opacity: 0;
+    animation: fadeUp 0.5s ease forwards 1s;
+  }
+
+  .thankyou p {
+    color: var(--ink-soft);
+    font-size: 15px;
+    line-height: 1.5;
+    max-width: 340px;
+    margin: 0 auto 24px;
+    opacity: 0;
+    animation: fadeUp 0.5s ease forwards 1.15s;
+  }
+
+  .coffee-btn {
+    display: inline-block;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 14.5px;
+    text-decoration: none;
+    color: #fff;
+    background: var(--ink);
+    padding: 13px 26px;
+    border-radius: 12px;
+    transition: transform 0.15s ease, background 0.2s ease;
+    opacity: 0;
+    animation: fadeUp 0.5s ease forwards 1.3s;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .coffee-btn:hover { transform: translateY(-2px); background: #000; }
+
+  /* ---------- Footer ---------- */
+  footer {
+    text-align: center;
+    margin-top: 70px;
+    font-size: 13px;
+    color: #a19d95;
+    position: relative;
+    z-index: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+    .shape { transform: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page" id="page">
+
+  <!-- decorative shapes injected via JS for positioning + scroll parallax -->
+
+  <section class="hero">
+    <h1>Quen Talk</h1>
+    <p class="sub">How my friends describe being on FaceTime with me.</p>
+    <p class="body">Let's use systems thinking to break down your problems.</p>
+  </section>
+
+  <div class="form-wrap">
+    <div class="card" id="formCard">
+      <form id="quenForm" novalidate>
+        <div class="field">
+          <label for="problem">What's the biggest problem you want to solve?</label>
+          <textarea id="problem" name="problem" placeholder="e.g. I can't decide whether to take the job or stay in school..." required></textarea>
+          <p class="field-error" id="errProblem">Required</p>
+        </div>
+
+        <div class="field">
+          <label for="tried">What have you tried so far?</label>
+          <textarea id="tried" name="tried" placeholder="e.g. I've made a list, asked a friend, weighed the pros and cons..." required></textarea>
+          <p class="field-error" id="errTried">Required</p>
+        </div>
+
+        <div class="field">
+          <label for="extra">Anything else you would like me to know?</label>
+          <textarea id="extra" name="extra"></textarea>
+        </div>
+
+        <label class="checkbox-field">
+          <input type="checkbox" id="consent" name="consent" required>
+          <span>I consent to this information being shared in a video, with identifying details changed.</span>
+        </label>
+        <p class="field-error" id="errConsent">Required</p>
+
+        <button type="submit" class="submit" id="submitBtn">Submit</button>
+        <p class="send-error" id="sendError">Hmm, that didn't send. Mind trying again?</p>
+      </form>
+
+      <div class="thankyou" id="thankyou">
+        <div class="plane-scene">
+          <div class="plane-trail"></div>
+          <div class="plane">
+            <svg viewBox="0 0 100 100" fill="none">
+              <path d="M6 52 L94 8 L58 92 L46 60 L6 52Z" fill="#fdfcfa" stroke="rgba(23,23,23,0.18)" stroke-width="2" stroke-linejoin="round"/>
+              <path d="M46 60 L94 8 L58 92 Z" fill="#f0eee9"/>
+            </svg>
+          </div>
+        </div>
+        <h2>Sent!</h2>
+        <p>Buy me a coffee? I don't make anything off my Instagram :)</p>
+        <a href="#" class="coffee-btn">Buy me a coffee</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>Quen Talk © 2026</footer>
+</div>
+
+<script>
+  // ---- Decorative shapes: circles, squares, triangles + a few stars ----
+  const shapeDefs = [
+    { color: 'var(--coral)',   type: 'circle',   top: '3%',   left: '-3%',  size: 54, rot: 0,   speed: 0.15 },
+    { color: 'var(--accent)',  type: 'square',   top: '1%',   left: '87%',  size: 42, rot: 12,  speed: 0.25 },
+    { color: 'var(--mustard)', type: 'triangle', top: '16%',  left: '93%',  size: 48, rot: -6,  speed: 0.35 },
+    { color: 'var(--green)',   type: 'square',   top: '28%',  left: '-6%',  size: 38, rot: 18,  speed: 0.2 },
+    { color: 'var(--purple)',  type: 'star4',    top: '40%',  left: '96%',  size: 30, rot: 0,   speed: 0.4 },
+    { color: 'var(--pink)',    type: 'circle',   top: '52%',  left: '-4%',  size: 32, rot: 0,   speed: 0.3 },
+    { color: 'var(--coral)',   type: 'triangle', top: '64%',  left: '92%',  size: 38, rot: 4,   speed: 0.18 },
+    { color: 'var(--accent)',  type: 'star4',    top: '76%',  left: '-5%',  size: 42, rot: -10, speed: 0.28 },
+    { color: 'var(--mustard)', type: 'circle',   top: '86%',  left: '90%',  size: 30, rot: 0,   speed: 0.22 },
+    { color: 'var(--green)',   type: 'triangle', top: '96%',  left: '2%',   size: 32, rot: 10,  speed: 0.32 },
+  ];
+
+  const svgFor = (type, color) => {
+    switch(type) {
+      case 'circle':
+        return `<circle cx="50" cy="50" r="48" fill="${color}"/>`;
+      case 'square':
+        return `<rect x="6" y="6" width="88" height="88" rx="16" fill="${color}"/>`;
+      case 'triangle':
+        return `<path d="M50 4 L96 92 L4 92 Z" fill="${color}" stroke-linejoin="round"/>`;
+      case 'star4':
+        return `<path d="M50 0 C52 38 62 48 100 50 C62 52 52 62 50 100 C48 62 38 52 0 50 C38 48 48 38 50 0 Z" fill="${color}"/>`;
+      case 'star8':
+        return `<path d="M50 0 C51 30 34 34 34 34 C34 34 30 51 0 50 C30 49 34 66 34 66 C34 66 30 82 50 100 C49 70 66 66 66 66 C66 66 70 49 100 50 C70 51 66 34 66 34 C66 34 70 18 50 0 Z" fill="${color}"/>`;
+      default:
+        return '';
+    }
+  };
+
+  const page = document.getElementById('page');
+  const shapeEls = [];
+
+  const vw = window.innerWidth;
+  const sizeFactor = vw <= 380 ? 0.5 : vw <= 560 ? 0.65 : 1;
+
+  shapeDefs.forEach(s => {
+    const el = document.createElement('div');
+    el.className = 'shape';
+    el.style.top = s.top;
+    el.style.left = s.left;
+    const size = s.size * sizeFactor;
+    el.style.width = size + 'px';
+    el.style.height = size + 'px';
+    el.dataset.rot = s.rot;
+    el.dataset.speed = s.speed;
+    el.style.opacity = vw <= 560 ? '0.75' : '0.9';
+    el.innerHTML = `<svg viewBox="0 0 100 100">${svgFor(s.type, s.color)}</svg>`;
+    page.appendChild(el);
+    shapeEls.push(el);
+  });
+
+  // shift shapes gently as the page scrolls
+  let ticking = false;
+  function updateParallax() {
+    const y = window.scrollY;
+    shapeEls.forEach(el => {
+      const speed = parseFloat(el.dataset.speed);
+      const rot = parseFloat(el.dataset.rot);
+      const offset = y * speed * 0.4;
+      el.style.transform = `translateY(${offset}px) rotate(${rot + y * 0.02}deg)`;
+    });
+    ticking = false;
+  }
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(updateParallax);
+      ticking = true;
+    }
+  });
+  updateParallax();
+
+  // ---- Form handling ----
+  const form = document.getElementById('quenForm');
+  const thankyou = document.getElementById('thankyou');
+  const submitBtn = document.getElementById('submitBtn');
+  const sendError = document.getElementById('sendError');
+
+  const problem = document.getElementById('problem');
+  const tried = document.getElementById('tried');
+  const extra = document.getElementById('extra');
+  const consent = document.getElementById('consent');
+
+  const errProblem = document.getElementById('errProblem');
+  const errTried = document.getElementById('errTried');
+  const errConsent = document.getElementById('errConsent');
+
+  function clearFieldError(field, errEl) {
+    field.classList.remove('invalid');
+    errEl.classList.remove('show');
+  }
+
+  problem.addEventListener('input', () => clearFieldError(problem, errProblem));
+  tried.addEventListener('input', () => clearFieldError(tried, errTried));
+  consent.addEventListener('change', () => clearFieldError(consent, errConsent));
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    sendError.classList.remove('show');
+
+    let valid = true;
+
+    if (!problem.value.trim()) {
+      problem.classList.add('invalid');
+      errProblem.classList.add('show');
+      valid = false;
+    } else {
+      clearFieldError(problem, errProblem);
+    }
+
+    if (!tried.value.trim()) {
+      tried.classList.add('invalid');
+      errTried.classList.add('show');
+      valid = false;
+    } else {
+      clearFieldError(tried, errTried);
+    }
+
+    if (!consent.checked) {
+      consent.classList.add('invalid');
+      errConsent.classList.add('show');
+      valid = false;
+    } else {
+      clearFieldError(consent, errConsent);
+    }
+
+    if (!valid) return;
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending...';
+
+    try {
+      const res = await fetch('https://formsubmit.co/ajax/quenifer@qthos.co', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          _subject: 'New Quen Talk submission',
+          problem: problem.value.trim(),
+          tried_so_far: tried.value.trim(),
+          additional_info: extra.value.trim() || '(none)',
+          video_consent: 'Yes'
+        })
+      });
+
+      if (!res.ok) throw new Error('send failed');
+
+      form.style.display = 'none';
+      thankyou.classList.add('show');
+    } catch (err) {
+      sendError.classList.add('show');
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Submit';
+    }
+  });
+</script>
+
+</body>
+</html>
