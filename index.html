@@ -574,7 +574,7 @@
           <p class="field-error" id="errConsent">Required</p>
 
           <button type="submit" class="submit" id="submitBtn">Submit</button>
-          <p class="send-error" id="sendError">Hmm, that didn't send. Mind trying again?</p>
+          <p class="send-error" id="sendError">Error. Try again later.</p>
         </div>
       </form>
 
@@ -785,7 +785,10 @@
     try {
       const res = await fetch('https://formsubmit.co/ajax/quenifer@qthos.co', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
         body: JSON.stringify({
           _subject: 'New Quen Talk submission',
           problem: problem.value.trim(),
@@ -800,6 +803,7 @@
       form.style.display = 'none';
       thankyou.classList.add('show');
     } catch (err) {
+      sendError.textContent = 'Error. Try again later.';
       sendError.classList.add('show');
       submitBtn.disabled = false;
       submitBtn.textContent = 'Submit';
