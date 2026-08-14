@@ -407,6 +407,73 @@
     * { animation: none !important; transition: none !important; }
     .shape { transform: none !important; }
   }
+
+  /* ---------- Final mobile layout override ---------- */
+  @media (max-width: 560px) {
+    html,
+    body {
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 100%;
+      margin: 0 auto;
+      padding-left: 12px;
+      padding-right: 12px;
+      overflow-x: clip;
+    }
+
+    .hero {
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      padding-top: 105px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 64px;
+      margin-bottom: 35px;
+    }
+
+    .hero .sub {
+      width: 100%;
+      max-width: 330px;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 17px;
+      text-align: center;
+    }
+
+    .form-wrap {
+      width: 100%;
+      max-width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 32px 20px;
+    }
+
+    .field label {
+      font-size: 16px;
+    }
+
+    textarea {
+      font-size: 16px;
+    }
+  }
+
 </style>
 </head>
 <body>
