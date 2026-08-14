@@ -362,12 +362,6 @@ a { color: var(--accent); }
   white-space: nowrap;
 }
 
-.quentalk-invite {
-  margin: 0 auto !important;
-  color: var(--ink) !important;
-  font-weight: 500;
-}
-
 @media (max-width: 700px) {
   .quentalk-heading p {
     white-space: normal;
@@ -417,6 +411,13 @@ a { color: var(--accent); }
 .card > * { position: relative; z-index: 1; }
 
 .field { margin-bottom: 10px; }
+
+.card-intro {
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  margin: 0 0 26px;
+}
 
 .field label {
   display: block;
@@ -721,11 +722,11 @@ footer {
   <div class="quentalk-heading">
     <h2>QuenTalk</h2>
     <p>A new series where I try to untangle your problems for you.</p>
-    <p class="quentalk-invite">Tell me your biggest problem. I will turn it into a framework that might help us see it differently.</p>
   </div>
 
   <div class="form-wrap">
     <div class="card" id="formCard">
+      <p class="card-intro">Tell me your biggest problem. I will turn it into a framework that might help us see it differently.</p>
       <form id="quenForm" novalidate>
         <div class="form-step active" data-step="1">
           <div class="field">
