@@ -183,7 +183,7 @@ fetch("data.json").then(r=>r.json()).then(d=>{
   const avgMonthly = Math.round(w.contentViews / (wDays/30));
   const kpis = [
     ["Followers", d.latest.followers, "+"+fmt(d.latest.followers-d.series[0].followers)+" since Nov 12", ""],
-    ["Views — Jul 18 to now", w.contentViews, "all content, lifetime window", ""],
+    ["Lifetime views", w.contentViews, "all content since Jul 18", ""],
     ["Monthly views", d.latest.views28d, "last 28 days", "rolling window"],
     ["Average monthly views", avgMonthly, "since Jul 18", ""],
   ];
