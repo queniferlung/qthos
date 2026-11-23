@@ -13,50 +13,55 @@
          font-family:Helvetica, Arial, sans-serif; font-weight:400; }
   .wrap { max-width:1020px; margin:0 auto; padding:28px 18px 60px; }
   header { display:flex; flex-wrap:wrap; gap:12px; align-items:flex-start; justify-content:space-between; margin-bottom:22px; }
-  header h1 { font-size:30px; margin:0 0 4px; letter-spacing:-.02em; font-weight:700; color:var(--ink-page); }
+  header h1 { font-size:26px; margin:0 0 4px; letter-spacing:-.02em; font-weight:700; color:var(--ink-page); }
   header h1 a { color:var(--ink-page); text-decoration:none; }
   header h1 a:hover { text-decoration:underline; }
   header p { margin:2px 0; color:#c6c9d8; font-size:15px; font-weight:400; }
   .range-row { display:flex; justify-content:flex-end; margin-bottom:22px; }
-  header .updated { font-size:13px; color:var(--muted); }
+  header .updated { font-size:14px; color:#c6c9d8; }
   .range { display:flex; align-items:center; gap:8px; font-size:14px; color:#c6c9d8; font-weight:400; }
-  .range select { font-family:Helvetica, Arial, sans-serif; font-weight:400; font-size:14px; color:var(--ink); background:var(--card); border:1px solid var(--card);
-                  border-radius:9px; padding:8px 10px; cursor:pointer; }
-  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin-bottom:22px; }
+  .range select { font-family:Helvetica, Arial, sans-serif; font-weight:400; font-size:15px; color:var(--ink); background:var(--card); border:1px solid var(--card);
+                  border-radius:9px; padding:10px 12px; cursor:pointer; }
+  .grid { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:22px; }
   .kpi { background:var(--card); border-radius:14px; padding:14px 16px; }
   .kpi .label { font-size:12px; color:var(--muted-card); text-transform:uppercase; letter-spacing:.04em; font-weight:400; }
-  .kpi .value { font-size:26px; font-weight:700; margin-top:4px; letter-spacing:-.01em; color:var(--ink); }
+  .kpi .value { font-size:22px; font-weight:700; margin-top:4px; letter-spacing:-.01em; color:var(--ink); }
   .kpi .delta { font-size:13px; color:var(--slate); margin-top:2px; font-weight:400; }
   .kpi .sub { font-size:12px; color:var(--muted-card); margin-top:2px; font-weight:400; }
   .card { background:var(--card); color:var(--ink); border-radius:14px; padding:18px; margin-bottom:22px; }
-  .card h2 { font-size:18px; margin:0 0 4px; font-weight:700; color:var(--ink); }
+  .card h2 { font-size:17px; margin:0 0 4px; font-weight:700; color:var(--ink); }
   .card .hint { font-size:13px; color:var(--muted-card); margin:0 0 12px; font-weight:400; }
   svg.chart { width:100%; height:auto; display:block; }
   table { width:100%; border-collapse:collapse; font-size:14px; color:var(--ink); }
-  th, td { text-align:left; padding:9px 8px; border-bottom:1px solid var(--line); white-space:nowrap; font-weight:400; }
+  th, td { text-align:left; padding:7px 6px; border-bottom:1px solid var(--line); white-space:nowrap; font-weight:400; }
   th { font-size:12px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted-card); font-weight:400; }
   td.num, th.num { text-align:right; font-variant-numeric:tabular-nums; }
-  td.wrap { white-space:normal; min-width:180px; }
+  td.wrap { white-space:normal; min-width:160px; }
   tr:last-child td { border-bottom:none; }
   a { color:var(--slate); text-decoration:none; font-weight:400; }
   a:hover { text-decoration:underline; }
   .thumb { width:56px; height:56px; object-fit:cover; border-radius:8px; display:block; }
   .thumb-link { display:inline-block; }
   .thumb-link:hover .thumb { outline:2px solid var(--accent); outline-offset:1px; }
-  .top-row { display:grid; grid-template-columns:56px 1fr 110px; gap:12px; align-items:center; margin-bottom:12px; font-size:13px; }
-  .top-row .cap { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-  .top-row .val { text-align:right; font-variant-numeric:tabular-nums; font-weight:700; color:var(--ink); }
+  .top-row { display:grid; grid-template-columns:72px 1fr 110px; gap:12px; align-items:center; margin-bottom:12px; font-size:14px; }
+  .top-row .thumb { width:72px; height:72px; }
+  .top-row .cap { overflow:hidden; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; white-space:normal; line-height:1.35; }
+  .top-row .val { text-align:right; font-variant-numeric:tabular-nums; font-weight:700; font-size:15px; color:var(--ink); }
   .photos { display:grid; grid-template-columns:1fr; gap:12px; }
-  .photos img { width:100%; height:auto; border-radius:10px; display:block; }
-  .card h3 { font-size:15px; margin:18px 0 6px; font-weight:700; color:var(--ink); }
+  .photos img { width:100%; max-width:640px; height:auto; border-radius:10px; display:block; margin:0 auto; }
+  .card h3 { font-size:16px; margin:18px 0 6px; font-weight:700; color:var(--ink); }
   .card h3:first-of-type { margin-top:2px; }
-  .card .link-line { margin:0 0 6px; font-size:15px; }
-  footer { font-size:13px; color:var(--muted); text-align:center; font-weight:400; }
+  .card .link-line { margin:0 0 6px; font-size:16px; }
+  .gtm-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+  footer { font-size:14px; color:#c6c9d8; text-align:center; font-weight:400; }
   @media (max-width:640px){
-    header h1{font-size:24px;} .kpi .value{font-size:22px;}
-    .top-row { grid-template-columns:48px 1fr 80px; }
+    header h1{font-size:24px;} .kpi .value{font-size:20px;}
+    .grid { grid-template-columns:repeat(2,1fr); }
+    .top-row { grid-template-columns:56px 1fr 80px; }
+    .top-row .thumb { width:56px; height:56px; }
     .photos { grid-template-columns:1fr; }
     .thumb { width:48px; height:48px; }
+    .gtm-grid { grid-template-columns:1fr; }
   }
 </style>
 </head>
@@ -118,11 +123,17 @@
 
   <div class="card">
     <h2>Building Content GTMs</h2>
-    <h3>Substack</h3>
-    <p class="link-line"><a href="https://quenifer.substack.com/p/how-i-got-1m-views-on-instagram-in?trk=public_post_comment-text" target="_blank" rel="noopener">How I Got 1M Views in 30 Days</a></p>
-    <h3>X</h3>
-    <p class="link-line"><a href="https://x.com/queniferlungg/status/2115505145383702820?a=IvQgiYkegEyJ5LvMcc0&amp;s=20" target="_blank" rel="noopener">Tips for Hooks</a></p>
-    <p class="link-line"><a href="https://x.com/queniferlungg/status/2110479467957145772" target="_blank" rel="noopener">Hiring an Editor</a></p>
+    <div class="gtm-grid">
+      <div>
+        <h3>Substack</h3>
+        <p class="link-line"><a href="https://quenifer.substack.com/p/how-i-got-1m-views-on-instagram-in?trk=public_post_comment-text" target="_blank" rel="noopener">How I Got 1M Views in 30 Days</a></p>
+      </div>
+      <div>
+        <h3>X</h3>
+        <p class="link-line"><a href="https://x.com/queniferlungg/status/2115505145383702820?a=IvQgiYkegEyJ5LvMcc0&amp;s=20" target="_blank" rel="noopener">Tips for Hooks</a></p>
+        <p class="link-line"><a href="https://x.com/queniferlungg/status/2110479467957145772" target="_blank" rel="noopener">Hiring an Editor</a></p>
+      </div>
+    </div>
   </div>
 
   <footer>Source: Instagram account insights for @queniferlung · refreshed every morning</footer>
@@ -136,22 +147,22 @@ const GRID = "#c9c9d1", AXIS = "#5a5f73";
 function lineChart(el, dates, values, color) {
   const W=920, H=260, P={l:64,r:14,t:14,b:28};
   let min = Math.min(...values), max = Math.max(...values);
-  const pad = (max-min)*0.08 || 1; min-=pad; max+=pad;
+  const pad = (max-min)*0.03 || 1; min-=pad; max+=pad;
   const n = values.length;
   const x = i => P.l + (W-P.l-P.r)*i/Math.max(n-1,1);
   const y = v => P.t + (H-P.t-P.b)*(1-(v-min)/(max-min));
   const grid = [0.25,0.5,0.75].map(f=>{
     const v = min+(max-min)*f;
     return `<line x1="${P.l}" y1="${y(v)}" x2="${W-P.r}" y2="${y(v)}" stroke="${GRID}" stroke-width="1"/>
-      <text x="${P.l-8}" y="${y(v)+4}" text-anchor="end" font-size="11" fill="${AXIS}">${fmt(Math.round(v))}</text>`;
+      <text x="${P.l-8}" y="${y(v)+4}" text-anchor="end" font-size="12" fill="${AXIS}">${fmt(Math.round(v))}</text>`;
   }).join("");
   const step = Math.ceil(n/12);
   const labels = dates.map((d,i)=> i%step===0 || i===n-1 ?
-    `<text x="${x(i)}" y="${H-8}" text-anchor="middle" font-size="11" fill="${AXIS}">${d.slice(5)}</text>` : "").join("");
+    `<text x="${x(i)}" y="${H-8}" text-anchor="middle" font-size="12" fill="${AXIS}">${d.slice(5)}</text>` : "").join("");
   const pts = values.map((v,i)=>`${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(" ");
   const dots = values.map((v,i)=> i%Math.ceil(n/30)===0 || i===n-1 ?
-    `<circle cx="${x(i)}" cy="${y(v)}" r="3" fill="${color}"><title>${dates[i]}: ${fmt(v)}</title></circle>` : "").join("");
-  el.innerHTML = `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img"><polyline points="${pts}" fill="none" stroke="${color}" stroke-width="2.5" stroke-linejoin="round"/>${grid}${dots}${labels}</svg>`;
+    `<circle cx="${x(i)}" cy="${y(v)}" r="3.5" fill="${color}"><title>${dates[i]}: ${fmt(v)}</title></circle>` : "").join("");
+  el.innerHTML = `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img"><polyline points="${pts}" fill="none" stroke="${color}" stroke-width="3" stroke-linejoin="round"/>${grid}${dots}${labels}</svg>`;
 }
 
 let DATA = null;
