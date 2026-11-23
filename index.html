@@ -200,7 +200,7 @@ fetch("data.json").then(r=>r.json()).then(d=>{
   const kpis = [
     ["Followers", d.latest.followers, "+"+fmt(d.latest.followers-d.series[0].followers)+" since Nov 12", ""],
     ["Views — Jul 18 to now", w.contentViews, "all content, lifetime window", ""],
-    ["Aggregated account level views from IG and FB", d.latest.views28d, "last 28 days", "rolling window"],
+    ["Monthly views", d.latest.views28d, "last 28 days", "rolling window"],
     ["Viewers", d.latest.viewers28d, "last 28 days", "rolling window"],
   ];
   document.getElementById("kpis").innerHTML = kpis.map(([l,v,dl,sub])=>
