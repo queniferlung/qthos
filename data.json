@@ -1,628 +1,623 @@
 {
- "generatedAt": "2026-11-22T08:59:42.416109-05:00",
+ "generatedAt": "2026-11-23T11:57:28.648408-05:00",
  "username": "queniferlung",
  "displayName": "Quen",
  "bio": "helping you become a systems thinker \u2014 turning messy ideas into diagrams",
  "rangeStart": "2026-07-18",
  "followersDaily": [
   {
-   "date": "2026-07-18",
-   "followers": 2549,
-   "change": 13
-  },
-  {
    "date": "2026-07-19",
-   "followers": 2551,
+   "followers": 2564,
    "change": 2
   },
   {
    "date": "2026-07-20",
-   "followers": 2569,
+   "followers": 2582,
    "change": 18
   },
   {
    "date": "2026-07-21",
-   "followers": 2581,
+   "followers": 2594,
    "change": 12
   },
   {
    "date": "2026-07-22",
-   "followers": 2589,
+   "followers": 2602,
    "change": 8
   },
   {
    "date": "2026-07-24",
-   "followers": 2606,
+   "followers": 2619,
    "change": 17
   },
   {
    "date": "2026-07-25",
-   "followers": 2612,
+   "followers": 2625,
    "change": 6
   },
   {
    "date": "2026-07-26",
-   "followers": 2633,
+   "followers": 2646,
    "change": 21
   },
   {
    "date": "2026-07-27",
-   "followers": 2649,
+   "followers": 2662,
    "change": 16
   },
   {
    "date": "2026-07-28",
-   "followers": 2659,
+   "followers": 2672,
    "change": 10
   },
   {
    "date": "2026-07-29",
-   "followers": 2664,
+   "followers": 2677,
    "change": 5
   },
   {
    "date": "2026-07-30",
-   "followers": 2671,
+   "followers": 2684,
    "change": 7
   },
   {
    "date": "2026-07-31",
-   "followers": 2679,
+   "followers": 2692,
    "change": 8
   },
   {
    "date": "2026-08-01",
-   "followers": 2683,
+   "followers": 2696,
    "change": 4
   },
   {
    "date": "2026-08-02",
-   "followers": 2693,
+   "followers": 2706,
    "change": 10
   },
   {
    "date": "2026-08-03",
-   "followers": 2699,
+   "followers": 2712,
    "change": 6
   },
   {
    "date": "2026-08-04",
-   "followers": 2703,
+   "followers": 2716,
    "change": 4
   },
   {
    "date": "2026-08-05",
-   "followers": 2701,
+   "followers": 2714,
    "change": -2
   },
   {
    "date": "2026-08-06",
-   "followers": 2713,
+   "followers": 2726,
    "change": 12
   },
   {
    "date": "2026-08-07",
-   "followers": 2905,
+   "followers": 2918,
    "change": 192
   },
   {
    "date": "2026-08-08",
-   "followers": 2986,
+   "followers": 2999,
    "change": 81
   },
   {
    "date": "2026-08-09",
-   "followers": 3059,
+   "followers": 3072,
    "change": 73
   },
   {
    "date": "2026-08-10",
-   "followers": 3361,
+   "followers": 3374,
    "change": 302
   },
   {
    "date": "2026-08-11",
-   "followers": 3441,
+   "followers": 3454,
    "change": 80
   },
   {
    "date": "2026-08-12",
-   "followers": 3470,
+   "followers": 3483,
    "change": 29
   },
   {
    "date": "2026-08-13",
-   "followers": 3550,
+   "followers": 3563,
    "change": 80
   },
   {
    "date": "2026-08-14",
-   "followers": 4052,
+   "followers": 4065,
    "change": 502
   },
   {
    "date": "2026-08-15",
-   "followers": 4217,
+   "followers": 4230,
    "change": 165
   },
   {
    "date": "2026-08-16",
-   "followers": 4340,
+   "followers": 4353,
    "change": 123
   },
   {
    "date": "2026-08-17",
-   "followers": 4393,
+   "followers": 4406,
    "change": 53
   },
   {
    "date": "2026-08-18",
-   "followers": 4452,
+   "followers": 4465,
    "change": 59
   },
   {
    "date": "2026-08-19",
-   "followers": 4562,
+   "followers": 4575,
    "change": 110
   },
   {
    "date": "2026-08-20",
-   "followers": 4619,
+   "followers": 4632,
    "change": 57
   },
   {
    "date": "2026-08-21",
-   "followers": 4641,
+   "followers": 4654,
    "change": 22
   },
   {
    "date": "2026-08-22",
-   "followers": 4667,
+   "followers": 4680,
    "change": 26
   },
   {
    "date": "2026-08-23",
-   "followers": 4697,
+   "followers": 4710,
    "change": 30
   },
   {
    "date": "2026-08-24",
-   "followers": 4718,
+   "followers": 4731,
    "change": 21
   },
   {
    "date": "2026-08-25",
-   "followers": 4739,
+   "followers": 4752,
    "change": 21
   },
   {
    "date": "2026-08-26",
-   "followers": 4755,
+   "followers": 4768,
    "change": 16
   },
   {
    "date": "2026-08-27",
-   "followers": 4774,
+   "followers": 4787,
    "change": 19
   },
   {
    "date": "2026-08-28",
-   "followers": 4782,
+   "followers": 4795,
    "change": 8
   },
   {
    "date": "2026-08-29",
-   "followers": 4797,
+   "followers": 4810,
    "change": 15
   },
   {
    "date": "2026-08-30",
-   "followers": 4824,
+   "followers": 4837,
    "change": 27
   },
   {
    "date": "2026-08-31",
-   "followers": 4860,
+   "followers": 4873,
    "change": 36
   },
   {
    "date": "2026-09-01",
-   "followers": 4897,
+   "followers": 4910,
    "change": 37
   },
   {
    "date": "2026-09-02",
-   "followers": 4933,
+   "followers": 4946,
    "change": 36
   },
   {
    "date": "2026-09-03",
-   "followers": 4955,
+   "followers": 4968,
    "change": 22
   },
   {
    "date": "2026-09-04",
-   "followers": 4991,
+   "followers": 5004,
    "change": 36
   },
   {
    "date": "2026-09-05",
-   "followers": 5029,
+   "followers": 5042,
    "change": 38
   },
   {
    "date": "2026-09-06",
-   "followers": 5067,
+   "followers": 5080,
    "change": 38
   },
   {
    "date": "2026-09-07",
-   "followers": 5105,
+   "followers": 5118,
    "change": 38
   },
   {
    "date": "2026-09-08",
-   "followers": 5150,
+   "followers": 5163,
    "change": 45
   },
   {
    "date": "2026-09-09",
-   "followers": 5172,
+   "followers": 5185,
    "change": 22
   },
   {
    "date": "2026-09-10",
-   "followers": 5178,
+   "followers": 5191,
    "change": 6
   },
   {
    "date": "2026-09-11",
-   "followers": 5179,
+   "followers": 5192,
    "change": 1
   },
   {
    "date": "2026-09-12",
-   "followers": 5188,
+   "followers": 5201,
    "change": 9
   },
   {
    "date": "2026-09-13",
-   "followers": 5199,
+   "followers": 5212,
    "change": 11
   },
   {
    "date": "2026-09-14",
-   "followers": 5200,
+   "followers": 5213,
    "change": 1
   },
   {
    "date": "2026-09-16",
-   "followers": 5210,
+   "followers": 5223,
    "change": 10
   },
   {
    "date": "2026-09-17",
-   "followers": 5221,
+   "followers": 5234,
    "change": 11
   },
   {
    "date": "2026-09-18",
-   "followers": 5224,
+   "followers": 5237,
    "change": 3
   },
   {
    "date": "2026-09-19",
-   "followers": 5231,
+   "followers": 5244,
    "change": 7
   },
   {
    "date": "2026-09-20",
-   "followers": 5242,
+   "followers": 5255,
    "change": 11
   },
   {
    "date": "2026-09-21",
-   "followers": 5250,
+   "followers": 5263,
    "change": 8
   },
   {
    "date": "2026-09-23",
-   "followers": 5275,
+   "followers": 5288,
    "change": 25
   },
   {
    "date": "2026-09-24",
-   "followers": 5443,
+   "followers": 5456,
    "change": 168
   },
   {
    "date": "2026-09-25",
-   "followers": 5461,
+   "followers": 5474,
    "change": 18
   },
   {
    "date": "2026-09-26",
-   "followers": 5473,
+   "followers": 5486,
    "change": 12
   },
   {
    "date": "2026-09-27",
-   "followers": 5566,
+   "followers": 5579,
    "change": 93
   },
   {
    "date": "2026-09-28",
-   "followers": 5594,
+   "followers": 5607,
    "change": 28
   },
   {
    "date": "2026-09-29",
-   "followers": 5611,
+   "followers": 5624,
    "change": 17
   },
   {
    "date": "2026-09-30",
-   "followers": 5644,
+   "followers": 5657,
    "change": 33
   },
   {
    "date": "2026-10-01",
-   "followers": 5732,
+   "followers": 5745,
    "change": 88
   },
   {
    "date": "2026-10-02",
-   "followers": 5754,
+   "followers": 5767,
    "change": 22
   },
   {
    "date": "2026-10-03",
-   "followers": 5824,
+   "followers": 5837,
    "change": 70
   },
   {
    "date": "2026-10-04",
-   "followers": 5855,
+   "followers": 5868,
    "change": 31
   },
   {
    "date": "2026-10-05",
-   "followers": 5888,
+   "followers": 5901,
    "change": 33
   },
   {
    "date": "2026-10-06",
-   "followers": 5970,
+   "followers": 5983,
    "change": 82
   },
   {
    "date": "2026-10-07",
-   "followers": 6018,
+   "followers": 6031,
    "change": 48
   },
   {
    "date": "2026-10-08",
-   "followers": 6096,
+   "followers": 6109,
    "change": 78
   },
   {
    "date": "2026-10-09",
-   "followers": 6181,
+   "followers": 6194,
    "change": 85
   },
   {
    "date": "2026-10-10",
-   "followers": 6267,
+   "followers": 6280,
    "change": 86
   },
   {
    "date": "2026-10-11",
-   "followers": 6349,
+   "followers": 6362,
    "change": 82
   },
   {
    "date": "2026-10-12",
-   "followers": 6431,
+   "followers": 6444,
    "change": 82
   },
   {
    "date": "2026-10-13",
-   "followers": 6452,
+   "followers": 6465,
    "change": 21
   },
   {
    "date": "2026-10-14",
-   "followers": 6501,
+   "followers": 6514,
    "change": 49
   },
   {
    "date": "2026-10-15",
-   "followers": 6585,
+   "followers": 6598,
    "change": 84
   },
   {
    "date": "2026-10-16",
-   "followers": 6658,
+   "followers": 6671,
    "change": 73
   },
   {
    "date": "2026-10-17",
-   "followers": 6673,
+   "followers": 6686,
    "change": 15
   },
   {
    "date": "2026-10-18",
-   "followers": 6767,
+   "followers": 6780,
    "change": 94
   },
   {
    "date": "2026-10-19",
-   "followers": 7610,
+   "followers": 7623,
    "change": 843
   },
   {
    "date": "2026-10-20",
-   "followers": 7732,
+   "followers": 7745,
    "change": 122
   },
   {
    "date": "2026-10-21",
-   "followers": 7826,
+   "followers": 7839,
    "change": 94
   },
   {
    "date": "2026-10-22",
-   "followers": 7896,
+   "followers": 7909,
    "change": 70
   },
   {
    "date": "2026-10-23",
-   "followers": 8042,
+   "followers": 8055,
    "change": 146
   },
   {
    "date": "2026-10-24",
-   "followers": 8106,
+   "followers": 8119,
    "change": 64
   },
   {
    "date": "2026-10-25",
-   "followers": 8179,
+   "followers": 8192,
    "change": 73
   },
   {
    "date": "2026-10-26",
-   "followers": 8214,
+   "followers": 8227,
    "change": 35
   },
   {
    "date": "2026-10-27",
-   "followers": 8246,
+   "followers": 8259,
    "change": 32
   },
   {
    "date": "2026-10-28",
-   "followers": 8324,
+   "followers": 8337,
    "change": 78
   },
   {
    "date": "2026-10-29",
-   "followers": 8404,
+   "followers": 8417,
    "change": 80
   },
   {
    "date": "2026-10-30",
-   "followers": 8445,
+   "followers": 8458,
    "change": 41
   },
   {
    "date": "2026-10-31",
-   "followers": 8492,
+   "followers": 8505,
    "change": 47
   },
   {
    "date": "2026-11-01",
-   "followers": 8546,
+   "followers": 8559,
    "change": 54
   },
   {
    "date": "2026-11-02",
-   "followers": 8630,
+   "followers": 8643,
    "change": 84
   },
   {
    "date": "2026-11-03",
-   "followers": 8655,
+   "followers": 8668,
    "change": 25
   },
   {
    "date": "2026-11-04",
-   "followers": 8680,
+   "followers": 8693,
    "change": 25
   },
   {
    "date": "2026-11-05",
-   "followers": 8710,
+   "followers": 8723,
    "change": 30
   },
   {
    "date": "2026-11-06",
-   "followers": 8754,
+   "followers": 8767,
    "change": 44
   },
   {
    "date": "2026-11-07",
-   "followers": 8796,
+   "followers": 8809,
    "change": 42
   },
   {
    "date": "2026-11-08",
-   "followers": 8829,
+   "followers": 8842,
    "change": 33
   },
   {
    "date": "2026-11-09",
-   "followers": 8879,
+   "followers": 8892,
    "change": 50
   },
   {
    "date": "2026-11-10",
-   "followers": 8890,
+   "followers": 8903,
    "change": 11
   },
   {
    "date": "2026-11-11",
-   "followers": 8917,
+   "followers": 8930,
    "change": 27
   },
   {
    "date": "2026-11-12",
-   "followers": 9072,
+   "followers": 9085,
    "change": 155
   },
   {
    "date": "2026-11-13",
-   "followers": 9210,
+   "followers": 9223,
    "change": 138
   },
   {
    "date": "2026-11-14",
-   "followers": 9235,
+   "followers": 9248,
    "change": 25
   },
   {
    "date": "2026-11-15",
-   "followers": 9250,
+   "followers": 9263,
    "change": 15
   },
   {
    "date": "2026-11-16",
-   "followers": 9267,
+   "followers": 9280,
    "change": 17
   },
   {
    "date": "2026-11-17",
-   "followers": 9284,
+   "followers": 9297,
    "change": 17
   },
   {
    "date": "2026-11-18",
-   "followers": 9297,
+   "followers": 9310,
    "change": 13
   },
   {
    "date": "2026-11-19",
-   "followers": 9334,
+   "followers": 9347,
    "change": 37
   },
   {
    "date": "2026-11-20",
-   "followers": 9354,
+   "followers": 9367,
    "change": 20
   },
   {
    "date": "2026-11-21",
-   "followers": 9385,
+   "followers": 9398,
    "change": 31
   }
  ],
@@ -1138,14 +1133,14 @@
   {
    "date": "2026-11-22",
    "count": 0
+  },
+  {
+   "date": "2026-11-23",
+   "count": 0
   }
  ],
  "daily": {
   "views": [
-   {
-    "date": "2026-08-24",
-    "value": 15901
-   },
    {
     "date": "2026-08-25",
     "value": 11124
@@ -1500,18 +1495,18 @@
    },
    {
     "date": "2026-11-21",
-    "value": 13342
+    "value": 13343
    },
    {
     "date": "2026-11-22",
-    "value": 13947
+    "value": 16363
+   },
+   {
+    "date": "2026-11-23",
+    "value": 5539
    }
   ],
   "viewers": [
-   {
-    "date": "2026-08-24",
-    "value": 12538
-   },
    {
     "date": "2026-08-25",
     "value": 8713
@@ -1870,14 +1865,14 @@
    },
    {
     "date": "2026-11-22",
-    "value": 10486
+    "value": 12152
+   },
+   {
+    "date": "2026-11-23",
+    "value": 4102
    }
   ],
   "interactions": [
-   {
-    "date": "2026-08-24",
-    "value": 1854
-   },
    {
     "date": "2026-08-25",
     "value": 1428
@@ -2120,7 +2115,7 @@
    },
    {
     "date": "2026-10-24",
-    "value": 6386
+    "value": 6385
    },
    {
     "date": "2026-10-25",
@@ -2212,7 +2207,7 @@
    },
    {
     "date": "2026-11-16",
-    "value": 1807
+    "value": 1806
    },
    {
     "date": "2026-11-17",
@@ -2228,7 +2223,7 @@
    },
    {
     "date": "2026-11-20",
-    "value": 3251
+    "value": 3250
    },
    {
     "date": "2026-11-21",
@@ -2236,14 +2231,14 @@
    },
    {
     "date": "2026-11-22",
-    "value": 2508
+    "value": 2999
+   },
+   {
+    "date": "2026-11-23",
+    "value": 1053
    }
   ],
   "netFollowers": [
-   {
-    "date": "2026-08-24",
-    "value": 21
-   },
    {
     "date": "2026-08-25",
     "value": 21
@@ -2604,16 +2599,16 @@
  },
  "windowTotals": {
   "start": "2026-07-18",
-  "end": "2026-11-22",
-  "contentViews": 4350359,
-  "viewers": 2273255,
-  "likes": 361418,
-  "comments": 1095,
-  "shares": 66782,
-  "saves": 143196,
-  "profileVisits": 31468,
-  "engagedAccounts": 373079,
-  "totalInteractions": 662301
+  "end": "2026-11-23",
+  "contentViews": 4363702,
+  "viewers": 2277226,
+  "likes": 362747,
+  "comments": 1097,
+  "shares": 67071,
+  "saves": 143654,
+  "profileVisits": 31602,
+  "engagedAccounts": 374971,
+  "totalInteractions": 664774
  },
  "series": [
   {
@@ -2725,6 +2720,16 @@
    "followerGrowth28d": 1248,
    "totalViews30": 2327309,
    "totalLikes30": 213259
+  },
+  {
+   "date": "2026-11-23",
+   "followers": 9398,
+   "views28d": 1091151,
+   "viewers28d": 640913,
+   "profileVisits28d": 6183,
+   "followerGrowth28d": 1206,
+   "totalViews30": 2342733,
+   "totalLikes30": 214782
   }
  ],
  "topReels": [
@@ -2733,17 +2738,17 @@
    "date": "2026-08-13",
    "caption": "duality of human nature means outgrowing past versions of ourselves & misalignme",
    "url": "https://www.instagram.com/reel/Db_t3lbSKX8/",
-   "thumbnail": "https://scontent-ord5-1.cdninstagram.com/v/t51.82787-15/773099774_18123263857695790_3544825028304878541_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=108&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=AQLggA-zrYYQ7kNvwEkt18Q&_nc_oc=AdoAmTd_aOHiwgpNYDTGTug_vaqFEd5YjABc_hQLJT2PuUnsGQBmLDPUGy6AhKgqrSl_QVs8v05Ssm3pMWQV0fRl&_nc_zt=23&_nc_ht=scontent-ord5-1.cdninstagram.com&_nc_gid=jGnSSbsB0iHz8d_pGKdRHQ&_nc_ct=RQosPBUKFQQAAAA&oh=00_AQQkbqIXNJ8TtTN9oAxoG7w-TWQRsBylHqCEH_9KKNlOdg&oe=6B098994",
-   "views": 1006235,
+   "thumbnail": "https://scontent-ord5-1.cdninstagram.com/v/t51.82787-15/773099774_18123263857695790_3544825028304878541_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=108&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=AQLggA-zrYYQ7kNvwGDBsJ9&_nc_oc=Adp_7A5gNNHMQef9ufEOGEWsl1Vc7cB3Gtq7cDpJ17ZEwJcx-iFujhmd2xSScDBMbLDiKFtnw2EYps1nrOWuaK_b&_nc_zt=23&_nc_ht=scontent-ord5-1.cdninstagram.com&_nc_gid=5GHJ-46gmdZNJSc59aTpTQ&_nc_ct=RQosPBUKFQQAAAA&oh=00_AQTGURqXSqcn7GyrsXYQ544wLcUMp32015rRDOWR6fQwKw&oe=6B0A3254",
+   "views": 1006702,
    "viewers": 803168,
-   "avgWatchTimeMs": 13356,
+   "avgWatchTimeMs": 13357,
    "skipRate": 42.2,
-   "likes": 75879,
+   "likes": 75910,
    "likeRate": 7.5,
-   "shares": 12594,
+   "shares": 12598,
    "shareRate": 1.25,
    "saves": null,
-   "reposts": 4556,
+   "reposts": 4558,
    "comments": 207,
    "follows": 1551
   },
@@ -2752,131 +2757,131 @@
    "date": "2026-10-18",
    "caption": "urge to be validated for your experiences",
    "url": "https://www.instagram.com/reel/Deph-2Vyb6g/",
-   "thumbnail": "https://scontent-ord5-1.cdninstagram.com/v/t51.82787-15/856566464_18129452131695790_2714796050066832817_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=101&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=Le3knOdmt08Q7kNvwHrqX8h&_nc_oc=AdoLEHly4SFXP-1uKtRHpUbryfQZlNS0KgXhThW_kY7ucQD8FDS27eQ8VDldjji5xHzVKiI7OiU1XpbxGdJWbcIk&_nc_zt=23&_nc_ht=scontent-ord5-1.cdninstagram.com&_nc_gid=I7IGdZ2M96bYkgxbUsjIeQ&_nc_ct=RQosPBUKFQQAAAA&oh=00_AQSaKyaeok16-Z9FAq9ky2VEL6NeTDdfCzmwKA-J0-gAWw&oe=6B08C509",
-   "views": 763092,
+   "thumbnail": "https://scontent-ord5-1.cdninstagram.com/v/t51.82787-15/856566464_18129452131695790_2714796050066832817_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=101&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=oyFyL25y4mcQ7kNvwFsPjeQ&_nc_oc=AdoZpm7m_gy4ydxETOF1IhxAoxcPjIviMRrTvb9bgLzfjvcwDIdtX-n341DXuduC-JC31cnlc7b3WMHhT-obOSiK&_nc_zt=23&_nc_ht=scontent-ord5-1.cdninstagram.com&_nc_gid=TiY0WZ4c6qEvOnhcisvvIA&_nc_ct=RQosPBUKFQQAAAA&oh=00_AQQX3iHAoetjULdmcjLSiWlKCrUg_mEufiT9etZJbIJi-w&oe=6B0A4EC9",
+   "views": 763378,
    "viewers": 620713,
-   "avgWatchTimeMs": 10062,
+   "avgWatchTimeMs": 10061,
    "skipRate": 44.1,
-   "likes": 82068,
+   "likes": 82091,
    "likeRate": 10.8,
-   "shares": 12431,
+   "shares": 12438,
    "shareRate": 1.63,
    "saves": null,
-   "reposts": 7088,
+   "reposts": 7091,
    "comments": 104,
-   "follows": 924
+   "follows": 925
   },
   {
    "rank": 3,
    "date": "2026-08-06",
    "caption": "there\u2019s so much pressure to find your purpose in life, but what if there\u2019s more",
    "url": "https://www.instagram.com/reel/DbuPvdOKW8T/",
-   "thumbnail": "https://scontent-ord5-2.cdninstagram.com/v/t51.82787-15/767268032_18122716033695790_4359652653743903169_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=104&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=9PjtimYjPOcQ7kNvwHjRAmr&_nc_oc=Ado4Q1-CZGS1rFg_y3TZmhkri2cdY9YeQGb08MmyCe15t2CSHvaKbDpLU7xFGeftepAsch3dLuMxyh8gT1wFhG88&_nc_zt=23&_nc_ht=scontent-ord5-2.cdninstagram.com&_nc_gid=iNCUY_xjnV3QhA1Ze_tNXw&_nc_ct=RQosPBUKFQQAAAA&oh=00_AQSdEHdblb0LHy9wXNtY1TEtR09vUH6me9v1Wch2l5_a8A&oe=6B09866E",
-   "views": 398150,
-   "viewers": 307229,
-   "avgWatchTimeMs": 14306,
+   "thumbnail": "https://scontent-ord5-2.cdninstagram.com/v/t51.82787-15/767268032_18122716033695790_4359652653743903169_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=104&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=9PjtimYjPOcQ7kNvwE-e7PP&_nc_oc=AdqDzrhnn-hoCgAkz4NNZIixEKoSJ_zUilqVpZxz6RxQECRnB4rkxBW8Ywfv0L7bpqedZ-3grw647g3inLP3D_UH&_nc_zt=23&_nc_ht=scontent-ord5-2.cdninstagram.com&_nc_gid=56PMutMKid8ziBenj23Vnw&_nc_ct=RQosPBUKFQQAAAA&oh=00_AQRkbQTAuGjKL5HqZGpMybaU1MieH6glEJZo_ZPYTfOfYg&oe=6B0A2F2E",
+   "views": 398292,
+   "viewers": 307290,
+   "avgWatchTimeMs": 14307,
    "skipRate": 40.3,
-   "likes": 31005,
+   "likes": 31018,
    "likeRate": 7.8,
-   "shares": 9134,
+   "shares": 9138,
    "shareRate": 2.29,
    "saves": null,
-   "reposts": 1626,
+   "reposts": 1625,
    "comments": 68,
-   "follows": 1147
+   "follows": 1148
   },
   {
    "rank": 4,
    "date": "2026-08-09",
    "caption": "rewrite the narrative of your past to rewire your perception of it",
    "url": "https://www.instagram.com/reel/Db1epHoSrBf/",
-   "thumbnail": "https://scontent-ord5-1.cdninstagram.com/v/t51.71878-15/769113968_4503347376608265_3228106546757726174_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=101&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=JNs4I22tHQYQ7kNvwG5T7OH&_nc_oc=AdqkhmyEflhBgNM8p_4J9Cq_z5xg_WK8ddl7iZTaKN55ASFbhcHzrMxg1EjLl-cseouKTl7M7TnZNAvBA16NphSW&_nc_zt=23&_nc_ht=scontent-ord5-1.cdninstagram.com&_nc_gid=8dl8NwO9ITSJ5DCoBeXhDA&_nc_ct=RQosPBUKFQQAAAA&oh=00_AQSWya6HlQBTWzvIfBoo-AGtuoIzuNHLkbXLVzx0wI_50w&oe=6B09949B",
-   "views": 314442,
+   "thumbnail": "https://scontent-ord5-1.cdninstagram.com/v/t51.71878-15/769113968_4503347376608265_3228106546757726174_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=101&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=JNs4I22tHQYQ7kNvwEbIa0j&_nc_oc=Adqjb12_Dmo5sFNQYHFLmfgTi9MlUt_OkeWf2p_SyM-lqeiJ9oozlb4_r6OGHqGb-uDe62Cv2c6_2yPFDi9HG8cQ&_nc_zt=23&_nc_ht=scontent-ord5-1.cdninstagram.com&_nc_gid=5FuD-vYmTeQl7kgbq66kMA&_nc_ct=RQosPBUKFQQAAAA&oh=00_AQTjWII7zaBDLCl2B0mX9UzZhGMx2SJRrmrJGdb4-Lr5xA&oe=6B0A3D5B",
+   "views": 314613,
    "viewers": 250472,
-   "avgWatchTimeMs": 10075,
+   "avgWatchTimeMs": 10073,
    "skipRate": 47.8,
-   "likes": 27227,
+   "likes": 27250,
    "likeRate": 8.7,
    "shares": 4246,
    "shareRate": 1.35,
    "saves": null,
-   "reposts": 1407,
+   "reposts": 1408,
    "comments": 52,
-   "follows": 724
+   "follows": 726
   },
   {
    "rank": 5,
    "date": "2026-11-01",
    "caption": "differentiating passionate vs unconditional love",
    "url": "https://www.instagram.com/reel/DfNpvwEKaD4/",
-   "thumbnail": "https://scontent-ord5-1.cdninstagram.com/v/t51.71878-15/881313528_1075037292234269_4586574954344323278_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=106&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=YVSe273T_poQ7kNvwHNBY0H&_nc_oc=Adqr6WYt2tF7UIvxYkNsZRPaZaDdvtmNK0mfrzYY0PaZ0SPMxVWb2NjZyUnzyDRRutW-mQ3Ki8mmojbrvaU7EnVi&_nc_zt=23&_nc_ht=scontent-ord5-1.cdninstagram.com&_nc_gid=I7IGdZ2M96bYkgxbUsjIeQ&_nc_ct=RQosPBUKFQQAAAA&oh=00_AQQYjaQMYEKZIKF2uBWQGxN0OGVKqFeXDLqmImN_LLwLUQ&oe=6B08A906",
-   "views": 278934,
-   "viewers": 216028,
-   "avgWatchTimeMs": 14114,
-   "skipRate": 34.4,
-   "likes": 18645,
+   "thumbnail": "https://scontent-ord5-1.cdninstagram.com/v/t51.71878-15/881313528_1075037292234269_4586574954344323278_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=106&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=YVSe273T_poQ7kNvwFFuA4A&_nc_oc=Ado8jhNJ-r2wVT1u6wp5PilEB0TcPX0ZOjhOWfdtt6Y8VtYvtayS93KOAkFkVQZ4ie0l4KLhMPdm_szQYRLJxkgi&_nc_zt=23&_nc_ht=scontent-ord5-1.cdninstagram.com&_nc_gid=TiY0WZ4c6qEvOnhcisvvIA&_nc_ct=RQosPBUKFQQAAAA&oh=00_AQTplXsV0UUeKunuwv69N-GhNq5h_MTLvvO6TgkMMQvz4w&oe=6B0A32C6",
+   "views": 279433,
+   "viewers": 216391,
+   "avgWatchTimeMs": 14113,
+   "skipRate": 34.5,
+   "likes": 18695,
    "likeRate": 6.7,
-   "shares": 4288,
+   "shares": 4295,
    "shareRate": 1.54,
    "saves": null,
-   "reposts": 1094,
+   "reposts": 1099,
    "comments": 55,
-   "follows": 145
+   "follows": 147
   },
   {
    "rank": 6,
    "date": "2026-10-22",
    "caption": "emptiness of modern life can\u2019t be filled with material goods",
    "url": "https://www.instagram.com/reel/Dez6Rcty5q3/",
-   "thumbnail": "https://scontent-ord5-2.cdninstagram.com/v/t51.82787-15/858672846_18129827347695790_3389180045267380475_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=107&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=ko8fNWr_CLQQ7kNvwGMAZH8&_nc_oc=AdrR39Mh-L9ImKkTwXq_Un-nc-0ocjLiiOLSGy8XQgN07KY2sgRmBKy-UEKRdWo058laLLYdQxVHiMzqAyL90oZH&_nc_zt=23&_nc_ht=scontent-ord5-2.cdninstagram.com&_nc_gid=I7IGdZ2M96bYkgxbUsjIeQ&_nc_ct=RQosPBUKFQQAAAA&oh=00_AQThLd-DTvlSWUoVSxWPs6yz0kFc-YhpjxqjhulHwYP04A&oe=6B08D509",
-   "views": 215065,
-   "viewers": 178981,
-   "avgWatchTimeMs": 9269,
+   "thumbnail": "https://scontent-ord5-2.cdninstagram.com/v/t51.82787-15/858672846_18129827347695790_3389180045267380475_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=107&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=ko8fNWr_CLQQ7kNvwE9u8L8&_nc_oc=Adr0Hsb5lSXIWGPTrtzFlu09-ZuHEET5hBk9nIHhmFKoq6w2BDWrfGeXgltvCj7pev9CQOTF-3TOlrMNEcUuuMJP&_nc_zt=23&_nc_ht=scontent-ord5-2.cdninstagram.com&_nc_gid=TiY0WZ4c6qEvOnhcisvvIA&_nc_ct=RQosPBUKFQQAAAA&oh=00_AQQ1MWNt3usIBL-0xFVMNU4YDhJYU2zJOlF5QVw5JttmAg&oe=6B0A5EC9",
+   "views": 215556,
+   "viewers": 179537,
+   "avgWatchTimeMs": 9266,
    "skipRate": 46.9,
-   "likes": 22834,
+   "likes": 22898,
    "likeRate": 10.6,
-   "shares": 3226,
+   "shares": 3230,
    "shareRate": 1.5,
    "saves": null,
-   "reposts": 1568,
+   "reposts": 1572,
    "comments": 18,
-   "follows": 362
+   "follows": 364
   },
   {
    "rank": 7,
    "date": "2026-09-23",
    "caption": "fisher's model on lust, attraction & attachment",
    "url": "https://www.instagram.com/reel/DdpQ4gCSsaC/",
-   "thumbnail": "https://scontent-ord5-1.cdninstagram.com/v/t51.82787-15/823606546_18127211326695790_8912901566474616348_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=111&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=P_TkwALoovQQ7kNvwGWjdWj&_nc_oc=AdqHXzDPw_xEz9dqHo-xL17yOGCvLrxutmwYOXk3Qfw-OUPckZtD9l_gjkbxB8wZ-2Q9ibQ6BCD1hTuJA4XjX025&_nc_zt=23&_nc_ht=scontent-ord5-1.cdninstagram.com&_nc_gid=I7IGdZ2M96bYkgxbUsjIeQ&_nc_ct=RQosPBUKFQQAAAA&oh=00_AQSbBGVgcdvvg0L4t_jDlNdmHtG6o5r8pW296qdllqpXvg&oe=6B08D2FE",
-   "views": 195755,
-   "viewers": 148145,
-   "avgWatchTimeMs": 16075,
-   "skipRate": 37.7,
-   "likes": 17824,
+   "thumbnail": "https://scontent-ord5-1.cdninstagram.com/v/t51.82787-15/823606546_18127211326695790_8912901566474616348_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=111&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=P_TkwALoovQQ7kNvwG1H-PI&_nc_oc=AdpW5tmkIfMwTQtwIvk0LjIoQ8bxhgC4qIb5RKVuG8Es_FHckDGfH2EbiuC9VQKc0RcRhBjonco5Shh1P0OgI4UZ&_nc_zt=23&_nc_ht=scontent-ord5-1.cdninstagram.com&_nc_gid=TiY0WZ4c6qEvOnhcisvvIA&_nc_ct=RQosPBUKFQQAAAA&oh=00_AQRBhCTGvm1X0CIqoVqxQ0HWt6H--ZKw-hSEIx7G8XpsKQ&oe=6B0A5CBE",
+   "views": 198254,
+   "viewers": 149029,
+   "avgWatchTimeMs": 16081,
+   "skipRate": 37.6,
+   "likes": 18132,
    "likeRate": 9.1,
-   "shares": 6219,
-   "shareRate": 3.18,
+   "shares": 6315,
+   "shareRate": 3.19,
    "saves": null,
-   "reposts": 1785,
+   "reposts": 1820,
    "comments": 102,
-   "follows": 762
+   "follows": 771
   },
   {
    "rank": 8,
    "date": "2026-09-07",
    "caption": "using the wisdom of the crowd to our advantage in recognising our behavioural pa",
    "url": "https://www.instagram.com/reel/Dc-6qMzKXJd/",
-   "thumbnail": "https://scontent-ord5-2.cdninstagram.com/v/t51.82787-15/799561149_18125596021695790_35425718477450075_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=100&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=uIfoyv5vmUcQ7kNvwFsKWW2&_nc_oc=Adrsikq0OmkgjVJm8baLRKwC4_yUvKySxlvvrK7tjwE5aYYZTPAi328ZQQRiiLxsECkOEoUlpOXyxi3aWcgHqDDK&_nc_zt=23&_nc_ht=scontent-ord5-2.cdninstagram.com&_nc_gid=I7IGdZ2M96bYkgxbUsjIeQ&_nc_ct=RQosPBUKFQQAAAA&oh=00_AQTjfFi8_X5vjMTtyQgkL4o-cTIktuLUQ93nu2AFP7eGIg&oe=6B08B096",
-   "views": 127092,
-   "viewers": 99936,
+   "thumbnail": "https://scontent-ord5-2.cdninstagram.com/v/t51.82787-15/799561149_18125596021695790_35425718477450075_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=100&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=mRDNyJBTwqkQ7kNvwERRiIF&_nc_oc=Adrp2Ru32FZGd1PhDLJggTSfHYbhc7Q-HTKTStsrSVpdPkKGODTgTP_A4nsCkJXdYRnVvw3v2ImXH4OtcWelCV82&_nc_zt=23&_nc_ht=scontent-ord5-2.cdninstagram.com&_nc_gid=TiY0WZ4c6qEvOnhcisvvIA&_nc_ct=RQosPBUKFQQAAAA&oh=00_AQQY02CFsx_XFhWJFPpDgJwcnHwc294lFNDfbhToSmm2QQ&oe=6B0A3A56",
+   "views": 127241,
+   "viewers": 100085,
    "avgWatchTimeMs": 18797,
    "skipRate": 32.4,
-   "likes": 6797,
-   "likeRate": 5.3,
-   "shares": 1241,
+   "likes": 6817,
+   "likeRate": 5.4,
+   "shares": 1242,
    "shareRate": 0.98,
    "saves": null,
-   "reposts": 322,
+   "reposts": 324,
    "comments": 38,
    "follows": 131
   },
@@ -2885,12 +2890,12 @@
    "date": "2026-10-27",
    "caption": "grief is a reflection of your capacity to love #grief",
    "url": "https://www.instagram.com/reel/DfBA_wfKAZk/",
-   "thumbnail": "https://scontent-ord5-1.cdninstagram.com/v/t51.71878-15/869573688_1119183284190936_2891081520587898628_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=101&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=TBYnP83jVCQQ7kNvwEJw8Er&_nc_oc=Ado3ELbfhqttHRqDpCeq_83I7iyk6mfYdLyjaseY0aLDl0kQwB_8OEWbqVQYUExVmqz-n6ZTynePBwtzF5XY9ZEU&_nc_zt=23&_nc_ht=scontent-ord5-1.cdninstagram.com&_nc_gid=I7IGdZ2M96bYkgxbUsjIeQ&_nc_ct=RQosPBUKFQQAAAA&oh=00_AQReFRRxD8fRXyy21dbGyMqht0ZGq3zNbUGU32k3KB5AVg&oe=6B08B86B",
-   "views": 88924,
+   "thumbnail": "https://scontent-ord5-1.cdninstagram.com/v/t51.71878-15/869573688_1119183284190936_2891081520587898628_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=101&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=TBYnP83jVCQQ7kNvwFPpRfI&_nc_oc=AdpzQYmX0TDj2Onwmt6eoczjRsMZfiDtEP3hjok8jrjJEWTuUN6PUfuFM0_RSweBgVHOUW3y_niJhSUqpwDjpyaw&_nc_zt=23&_nc_ht=scontent-ord5-1.cdninstagram.com&_nc_gid=TiY0WZ4c6qEvOnhcisvvIA&_nc_ct=RQosPBUKFQQAAAA&oh=00_AQRYqoDS7jE0u_XIZ_Y13sS7A48AsPUyaln456fxcisXdg&oe=6B0A422B",
+   "views": 88953,
    "viewers": 72234,
    "avgWatchTimeMs": 7873,
    "skipRate": 56.0,
-   "likes": 6486,
+   "likes": 6487,
    "likeRate": 7.3,
    "shares": 1163,
    "shareRate": 1.31,
@@ -2904,29 +2909,29 @@
    "date": "2026-09-30",
    "caption": "emotional independence in your friendships\ud83d\udc8c\ud83d\udcac",
    "url": "https://www.instagram.com/reel/Dd61V22qg5N/",
-   "thumbnail": "https://scontent-ord5-2.cdninstagram.com/v/t15.5256-10/831762462_1860892295086009_6416736002279787372_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=103&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=DdAYcvJ-u58Q7kNvwGXAOOq&_nc_oc=AdogDqyIUuSp_d5ICD8P1QHYkcEDoxAweQeCQckCOFPpIrHFtgnC3j75xxJZWChLhfH9QzdVQ5c7D8LGp8l36wYq&_nc_zt=23&_nc_ht=scontent-ord5-2.cdninstagram.com&_nc_gid=I7IGdZ2M96bYkgxbUsjIeQ&_nc_ct=RQosPBUKFQQAAAA&oh=00_AQQ2Lgrz3TR02LXMd-xf9iMUAOxaKFQGGYhTn2lD1x6pRA&oe=6B08DAFE",
-   "views": 70249,
-   "viewers": 56444,
-   "avgWatchTimeMs": 12534,
+   "thumbnail": "https://scontent-ord5-2.cdninstagram.com/v/t15.5256-10/831762462_1860892295086009_6416736002279787372_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=103&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=wMG7O5pStjcQ7kNvwEuTfFJ&_nc_oc=AdovZGqHjhqJuxFB1z-tsU-Qj5JZQa-_PSZw4YeFmmOY1LF-_MH8ME3HoocewyHUEht3fxaDKhvYHDvA8_I_oJqa&_nc_zt=23&_nc_ht=scontent-ord5-2.cdninstagram.com&_nc_gid=TiY0WZ4c6qEvOnhcisvvIA&_nc_ct=RQosPBUKFQQAAAA&oh=00_AQSYNpk4uKG8IZ_WSKWCT3SmmquaoLdpPRm3n52_fMWvdA&oe=6B0A2C7E",
+   "views": 70332,
+   "viewers": 56508,
+   "avgWatchTimeMs": 12532,
    "skipRate": 38.0,
-   "likes": 5949,
+   "likes": 5952,
    "likeRate": 8.5,
    "shares": 2467,
    "shareRate": 3.51,
    "saves": null,
-   "reposts": 248,
+   "reposts": 247,
    "comments": 20,
    "follows": 340
   }
  ],
  "medianReelViews": 11240,
  "latest": {
-  "followers": 9370,
-  "views28d": 1102392,
-  "viewers28d": 650022,
+  "followers": 9398,
+  "views28d": 1091151,
+  "viewers28d": 640913,
   "profileVisits28d": 6183,
-  "followerGrowth28d": 1248,
-  "totalViews30": 2327309,
-  "totalLikes30": 213259
+  "followerGrowth28d": 1206,
+  "totalViews30": 2342733,
+  "totalLikes30": 214782
  }
 }
