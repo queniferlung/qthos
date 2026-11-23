@@ -40,15 +40,13 @@
   .thumb { width:56px; height:56px; object-fit:cover; border-radius:8px; display:block; }
   .thumb-link { display:inline-block; }
   .thumb-link:hover .thumb { outline:2px solid var(--accent); outline-offset:1px; }
-  .bar-row { display:grid; grid-template-columns:56px 220px 1fr 90px; gap:10px; align-items:center; margin-bottom:10px; font-size:13px; }
-  .bar-row .cap { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-  .bar-track { background:#cfcfd8; border-radius:6px; height:18px; overflow:hidden; }
-  .bar-fill { background:var(--accent); height:100%; border-radius:6px; }
-  .bar-row .val { text-align:right; font-variant-numeric:tabular-nums; font-weight:700; color:var(--ink); }
+  .top-row { display:grid; grid-template-columns:56px 1fr 110px; gap:12px; align-items:center; margin-bottom:12px; font-size:13px; }
+  .top-row .cap { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .top-row .val { text-align:right; font-variant-numeric:tabular-nums; font-weight:700; color:var(--ink); }
   footer { font-size:13px; color:var(--muted); text-align:center; font-weight:400; }
   @media (max-width:640px){
     header h1{font-size:24px;} .kpi .value{font-size:22px;}
-    .bar-row { grid-template-columns:48px 130px 1fr 70px; }
+    .top-row { grid-template-columns:48px 1fr 80px; }
     .thumb { width:48px; height:48px; }
   }
 </style>
@@ -80,15 +78,9 @@
   </div>
 
   <div class="card">
-    <h2>Views per week</h2>
-    <p class="hint" id="views-hint">Views per week, Aug 24 – now</p>
-    <div id="chart-views"></div>
-  </div>
-
-  <div class="card">
-    <h2>Reels per day</h2>
-    <p class="hint" id="reels-hint">Reels published per day, Jul 18 – now</p>
-    <div id="chart-reels"></div>
+    <h2>Views in the past month</h2>
+    <p class="hint" id="month-hint">Daily Views, last 30 days</p>
+    <div id="chart-month"></div>
   </div>
 
   <div class="card">
@@ -135,38 +127,6 @@ function lineChart(el, dates, values, color) {
   el.innerHTML = `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img"><polyline points="${pts}" fill="none" stroke="${color}" stroke-width="2.5" stroke-linejoin="round"/>${grid}${dots}${labels}</svg>`;
 }
 
-function barChart(el, dates, values, color) {
-  const W=920, H=260, P={l:64,r:14,t:14,b:28};
-  const min = Math.min(0, ...values), max = Math.max(...values);
-  const n = values.length;
-  const bw = (W-P.l-P.r)/n;
-  const y = v => P.t + (H-P.t-P.b)*(1-(v-min)/(max-min));
-  const zero = y(0);
-  const bars = values.map((v,i)=>{
-    const top = Math.min(y(v), zero), h = Math.abs(zero-y(v));
-    return `<rect x="${(P.l+i*bw+0.5).toFixed(1)}" y="${top.toFixed(1)}" width="${Math.max(bw-1,0.5).toFixed(1)}" height="${Math.max(h,1).toFixed(1)}" fill="${color}"><title>${dates[i]}: ${fmt(v)}</title></rect>`;
-  }).join("");
-  const step = Math.ceil(n/12);
-  const labels = dates.map((d,i)=> i%step===0 || i===n-1 ?
-    `<text x="${P.l+i*bw+bw/2}" y="${H-8}" text-anchor="middle" font-size="11" fill="${AXIS}">${d.slice(5)}</text>` : "").join("");
-  el.innerHTML = `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img">
-    <line x1="${P.l}" y1="${zero}" x2="${W-P.r}" y2="${zero}" stroke="${GRID}" stroke-width="1"/>${bars}${labels}</svg>`;
-}
-
-function weekly(dates, values) {
-  const weeks = [];
-  dates.forEach((d, i)=>{
-    const dt = new Date(d + "T12:00:00");
-    const day = (dt.getDay()+6)%7; // Monday = 0
-    const monday = new Date(dt); monday.setDate(dt.getDate()-day);
-    const key = monday.toISOString().slice(0,10);
-    const last = weeks[weeks.length-1];
-    if (last && last.date === key) last.value += values[i];
-    else weeks.push({date:key, value:values[i]});
-  });
-  return weeks;
-}
-
 let DATA = null;
 function render(range) {
   const d = DATA;
@@ -178,17 +138,12 @@ function render(range) {
   lineChart(document.getElementById("chart-growth"), fdates, fvals, "#424769");
   document.getElementById("growth-hint").textContent =
     `Total Followers, ${fdates[0]} – ${fdates[fdates.length-1]} (${fmt(fvals[0])} → ${fmt(fvals[fvals.length-1])})`;
-  // Views per week — bars
-  const vweeks = weekly(slice(d.daily.views.map(p=>p.date)), slice(d.daily.views.map(p=>p.value)));
-  barChart(document.getElementById("chart-views"), vweeks.map(w=>w.date), vweeks.map(w=>w.value), "#f9b17a");
-  document.getElementById("views-hint").textContent =
-    `Views per week, week of ${vweeks[0].date} – week of ${vweeks[vweeks.length-1].date}. Daily Views history starts Aug 24 — Instagram keeps 90 days.`;
-  // Reels per day — bars
-  const rdates = slice(d.reelsPerDay.map(p=>p.date));
-  const rvals = slice(d.reelsPerDay.map(p=>p.count));
-  barChart(document.getElementById("chart-reels"), rdates, rvals, "#676f9d");
-  document.getElementById("reels-hint").textContent =
-    `Reels published per day, ${rdates[0]} – ${rdates[rdates.length-1]} (${rvals.reduce((a,b)=>a+b,0)} reels in range)`;
+  // Views in the past month — daily line, last 30 days (fixed, not range-sliced)
+  const mdates = d.daily.views.slice(-30).map(p=>p.date);
+  const mvals = d.daily.views.slice(-30).map(p=>p.value);
+  lineChart(document.getElementById("chart-month"), mdates, mvals, "#f9b17a");
+  document.getElementById("month-hint").textContent =
+    `Daily Views, ${mdates[0]} – ${mdates[mdates.length-1]} (${fmt(mvals.reduce((a,b)=>a+b,0))} total)`;
 }
 
 fetch("data.json").then(r=>r.json()).then(d=>{
@@ -207,12 +162,10 @@ fetch("data.json").then(r=>r.json()).then(d=>{
     `<div class="kpi"><div class="label">${l}</div><div class="value">${fmt(v)}</div><div class="delta">${dl}</div>${sub?`<div class="sub">${sub}</div>`:""}</div>`).join("");
   render(document.getElementById("range").value);
   document.getElementById("range").addEventListener("change", e=>render(e.target.value));
-  const maxV = Math.max(...d.topReels.map(r=>r.views));
   const thumb = r => r.thumbnail
     ? `<a class="thumb-link" href="${r.url}" target="_blank" rel="noopener"><img class="thumb" src="${r.thumbnail}" alt="" loading="lazy"></a>` : "—";
   document.getElementById("top-bars").innerHTML = d.topReels.map(r=>
-    `<div class="bar-row">${thumb(r)}<div class="cap"><a href="${r.url}" target="_blank" rel="noopener">${r.caption}</a></div>
-     <div class="bar-track"><div class="bar-fill" style="width:${(r.views/maxV*100).toFixed(1)}%"></div></div>
+    `<div class="top-row">${thumb(r)}<div class="cap"><a href="${r.url}" target="_blank" rel="noopener">${r.caption}</a></div>
      <div class="val">${fmt(r.views)}</div></div>`).join("");
   document.querySelector("#top-table tbody").innerHTML = d.topReels.map(r=>
     `<tr><td>${thumb(r)}</td><td>${r.rank}</td><td class="wrap"><a href="${r.url}" target="_blank" rel="noopener">${r.caption}</a></td><td>${r.date}</td>
