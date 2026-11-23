@@ -1,10 +1,241 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>qthos</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>@queniferlung — Account Dashboard</title>
+<style>
+  :root { --bg:#faf9f7; --card:#fff; --ink:#1c1a17; --muted:#6f6a63; --line:#e8e4de;
+          --accent:#7c5cbf; --accent2:#2a9d8f; --good:#2a9d8f; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink);
+         font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; }
+  .wrap { max-width:1020px; margin:0 auto; padding:28px 18px 60px; }
+  header { display:flex; flex-wrap:wrap; gap:12px; align-items:flex-start; justify-content:space-between; margin-bottom:22px; }
+  header h1 { font-size:30px; margin:0 0 4px; letter-spacing:-.02em; }
+  header p { margin:2px 0; color:var(--muted); font-size:15px; }
+  header .updated { font-size:13px; }
+  .range { display:flex; align-items:center; gap:8px; font-size:14px; color:var(--muted); }
+  .range select { font:inherit; color:var(--ink); background:var(--card); border:1px solid var(--line);
+                  border-radius:9px; padding:8px 10px; cursor:pointer; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin-bottom:22px; }
+  .kpi { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:14px 16px; }
+  .kpi .label { font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:.04em; }
+  .kpi .value { font-size:26px; font-weight:700; margin-top:4px; letter-spacing:-.01em; }
+  .kpi .delta { font-size:13px; color:var(--good); margin-top:2px; }
+  .kpi .sub { font-size:12px; color:var(--muted); margin-top:2px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:18px; margin-bottom:22px; }
+  .card h2 { font-size:18px; margin:0 0 4px; }
+  .card .hint { font-size:13px; color:var(--muted); margin:0 0 12px; }
+  svg.chart { width:100%; height:auto; display:block; }
+  .legend { font-size:13px; color:var(--muted); margin-top:6px; }
+  .legend i { display:inline-block; width:12px; height:3px; border-radius:2px; margin-right:5px; vertical-align:middle; }
+  table { width:100%; border-collapse:collapse; font-size:14px; }
+  th, td { text-align:left; padding:9px 8px; border-bottom:1px solid var(--line); white-space:nowrap; }
+  th { font-size:12px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); }
+  td.num, th.num { text-align:right; font-variant-numeric:tabular-nums; }
+  td.wrap { white-space:normal; min-width:180px; }
+  tr:last-child td { border-bottom:none; }
+  a { color:var(--accent); text-decoration:none; }
+  a:hover { text-decoration:underline; }
+  .notes { font-size:13px; color:var(--muted); line-height:1.6; }
+  .notes li { margin-bottom:6px; }
+  .bar-row { display:grid; grid-template-columns:220px 1fr 90px; gap:10px; align-items:center; margin-bottom:8px; font-size:13px; }
+  .bar-row .cap { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .bar-track { background:#f0ede9; border-radius:6px; height:18px; overflow:hidden; }
+  .bar-fill { background:var(--accent); height:100%; border-radius:6px; }
+  .bar-row .val { text-align:right; font-variant-numeric:tabular-nums; font-weight:600; }
+  @media (max-width:640px){
+    header h1{font-size:24px;} .kpi .value{font-size:22px;}
+    .bar-row { grid-template-columns:130px 1fr 70px; }
+  }
+</style>
 </head>
 <body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>@queniferlung</h1>
+      <p>Quen — helping you become a systems thinker, turning messy ideas into diagrams.</p>
+      <p class="updated" id="updated">Loading…</p>
+    </div>
+    <label class="range">Range
+      <select id="range">
+        <option value="30" selected>Last 30 days</option>
+        <option value="60">Last 60 days</option>
+        <option value="90">Last 90 days</option>
+        <option value="all">All (from Jul 18)</option>
+      </select>
+    </label>
+  </header>
+
+  <div class="grid" id="kpis"></div>
+
+  <div class="card">
+    <h2>Views per day</h2>
+    <p class="hint" id="views-hint">Daily Views, Aug 24 – Nov 22, 2026</p>
+    <div id="chart-views"></div>
+  </div>
+
+  <div class="card">
+    <h2>Followers growth</h2>
+    <p class="hint" id="growth-hint">Net new Followers per day, Aug 24 – Nov 22, 2026</p>
+    <div id="chart-growth"></div>
+  </div>
+
+  <div class="card">
+    <h2>Top performing reels</h2>
+    <p class="hint">By lifetime Views, reels published Jul 18 – Nov 22, 2026</p>
+    <div id="top-bars"></div>
+  </div>
+
+  <div class="card">
+    <h2>Top reels — what Instagram ranks on</h2>
+    <p class="hint">Columns in Instagram's priority order: watch time first, then likes and sends per reach, then saves, reposts, comments, follows. Rates are per View.</p>
+    <div style="overflow-x:auto"><table id="top-table">
+      <thead><tr><th>#</th><th>Reel</th><th>Date</th><th class="num">Views</th><th class="num">Avg watch time</th><th class="num">Reels skip rate</th><th class="num">Likes</th><th class="num">Like rate</th><th class="num">Shares</th><th class="num">Share rate</th><th class="num">Saves</th><th class="num">Reposts</th><th class="num">Comments</th><th class="num">Follows</th></tr></thead>
+      <tbody></tbody>
+    </table></div>
+  </div>
+
+  <div class="card">
+    <h2>The race for 4th: Fisher vs vulnerability</h2>
+    <p class="hint">Lifetime Views of the Sep 23 Fisher reel and the Nov 12 vulnerability reel, Nov 14–22, 2026</p>
+    <div id="chart-race"></div>
+    <p class="legend"><i style="background:var(--accent)"></i>Sep 23 Fisher &nbsp; <i style="background:var(--accent2)"></i>Nov 12 vulnerability</p>
+  </div>
+
+  <div class="card notes">
+    <h2>Notes</h2>
+    <ul>
+      <li>Daily charts start Aug 24, 2026 — Instagram keeps 90 days of daily history, so earlier daily figures aren't available. Totals for the full Jul 18 – Nov 22 window are in the cards above.</li>
+      <li>Per-reel figures are lifetime figures from Instagram's owned-post insights. Average watch time is shown in seconds; Instagram does not specify the unit, so treat it as indicative.</li>
+      <li>Saves are shown as unavailable per reel: Instagram's per-reel endpoint returns 0 for every reel even though the account total is 143,196 saves for Jul 18 – Nov 22, so the per-reel figure isn't populated. The account-level total is in the cards above.</li>
+      <li>28-day account totals are a rolling window — falls in those numbers usually mean big days sliding out of the window, not a drop in daily performance.</li>
+      <li>Data refreshes every morning from the daily tracker snapshot. Source: Instagram account insights for @queniferlung.</li>
+    </ul>
+  </div>
+</div>
+
+<script>
+const fmt = n => n == null ? "—" : n.toLocaleString("en-US");
+const secs = ms => ms == null ? "—" : (ms/1000).toFixed(1) + "s";
+
+function lineChart(el, dates, values, color) {
+  const W=920, H=260, P={l:64,r:14,t:14,b:28};
+  let min = Math.min(...values), max = Math.max(...values);
+  const pad = (max-min)*0.08 || 1; min-=pad; max+=pad;
+  const n = values.length;
+  const x = i => P.l + (W-P.l-P.r)*i/Math.max(n-1,1);
+  const y = v => P.t + (H-P.t-P.b)*(1-(v-min)/(max-min));
+  const grid = [0.25,0.5,0.75].map(f=>{
+    const v = min+(max-min)*f;
+    return `<line x1="${P.l}" y1="${y(v)}" x2="${W-P.r}" y2="${y(v)}" stroke="#eee" stroke-width="1"/>
+      <text x="${P.l-8}" y="${y(v)+4}" text-anchor="end" font-size="11" fill="#8a857e">${fmt(Math.round(v))}</text>`;
+  }).join("");
+  const step = Math.ceil(n/12);
+  const labels = dates.map((d,i)=> i%step===0 || i===n-1 ?
+    `<text x="${x(i)}" y="${H-8}" text-anchor="middle" font-size="11" fill="#8a857e">${d.slice(5)}</text>` : "").join("");
+  const pts = values.map((v,i)=>`${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(" ");
+  const dots = values.map((v,i)=>`<circle cx="${x(i)}" cy="${y(v)}" r="3" fill="${color}"><title>${dates[i]}: ${fmt(v)}</title></circle>`).join("");
+  el.innerHTML = `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img"><polyline points="${pts}" fill="none" stroke="${color}" stroke-width="2.5" stroke-linejoin="round"/>${grid}${dots}${labels}</svg>`;
+}
+
+function barChart(el, dates, values, color) {
+  const W=920, H=260, P={l:64,r:14,t:14,b:28};
+  const min = Math.min(0, ...values), max = Math.max(...values);
+  const n = values.length;
+  const bw = (W-P.l-P.r)/n;
+  const y = v => P.t + (H-P.t-P.b)*(1-(v-min)/(max-min));
+  const zero = y(0);
+  const bars = values.map((v,i)=>{
+    const top = Math.min(y(v), zero), h = Math.abs(zero-y(v));
+    return `<rect x="${(P.l+i*bw+1).toFixed(1)}" y="${top.toFixed(1)}" width="${(bw-2).toFixed(1)}" height="${Math.max(h,1).toFixed(1)}" fill="${v<0?"#c2703d":color}"><title>${dates[i]}: ${v>0?"+":""}${fmt(v)}</title></rect>`;
+  }).join("");
+  const step = Math.ceil(n/12);
+  const labels = dates.map((d,i)=> i%step===0 || i===n-1 ?
+    `<text x="${P.l+i*bw+bw/2}" y="${H-8}" text-anchor="middle" font-size="11" fill="#8a857e">${d.slice(5)}</text>` : "").join("");
+  el.innerHTML = `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img">
+    <line x1="${P.l}" y1="${zero}" x2="${W-P.r}" y2="${zero}" stroke="#ddd" stroke-width="1"/>${bars}${labels}</svg>`;
+}
+
+let DATA = null;
+function render(range) {
+  const d = DATA;
+  const days = range === "all" ? 10000 : parseInt(range, 10);
+  const slice = arr => arr.slice(-days);
+  const vdates = slice(d.daily.views.map(p=>p.date));
+  const vvals = slice(d.daily.views.map(p=>p.value));
+  lineChart(document.getElementById("chart-views"), vdates, vvals, "#7c5cbf");
+  document.getElementById("views-hint").textContent =
+    `Daily Views, ${vdates[0]} – ${vdates[vdates.length-1]}`;
+  const gdates = slice(d.daily.netFollowers.map(p=>p.date));
+  const gvals = slice(d.daily.netFollowers.map(p=>p.value));
+  barChart(document.getElementById("chart-growth"), gdates, gvals, "#2a9d8f");
+  document.getElementById("growth-hint").textContent =
+    `Net new Followers per day, ${gdates[0]} – ${gdates[gdates.length-1]} (orange bars are net losses)`;
+}
+
+fetch("data.json").then(r=>r.json()).then(d=>{
+  DATA = d;
+  const last = d.series[d.series.length-1], prev = d.series[d.series.length-2];
+  document.getElementById("updated").textContent =
+    "Data as of " + new Date(d.generatedAt).toLocaleString("en-US",{month:"short",day:"numeric",year:"numeric",hour:"numeric",minute:"2-digit"}) +
+    " · refreshed every morning";
+  const w = d.windowTotals;
+  const kpis = [
+    ["Followers", d.latest.followers, "+"+fmt(d.latest.followers-d.series[0].followers)+" since Nov 12", ""],
+    ["Views — Jul 18 to Nov 22", w.contentViews, "all content, lifetime window", ""],
+    ["Aggregated account level views from IG and FB", d.latest.views28d, "last 28 days", "rolling window"],
+    ["Viewers", d.latest.viewers28d, "last 28 days", "rolling window"],
+    ["Profile visits", d.latest.profileVisits28d, "last 28 days", "rolling window"],
+    ["Likes — Jul 18 to Nov 22", w.likes, "all content", ""],
+    ["Saves — Jul 18 to Nov 22", w.saves, "all content", ""],
+  ];
+  document.getElementById("kpis").innerHTML = kpis.map(([l,v,dl,sub])=>
+    `<div class="kpi"><div class="label">${l}</div><div class="value">${fmt(v)}</div><div class="delta">${dl}</div>${sub?`<div class="sub">${sub}</div>`:""}</div>`).join("");
+  render(document.getElementById("range").value);
+  document.getElementById("range").addEventListener("change", e=>render(e.target.value));
+  const maxV = Math.max(...d.topReels.map(r=>r.views));
+  document.getElementById("top-bars").innerHTML = d.topReels.map(r=>
+    `<div class="bar-row"><div class="cap"><a href="${r.url}" target="_blank" rel="noopener">${r.caption}</a></div>
+     <div class="bar-track"><div class="bar-fill" style="width:${(r.views/maxV*100).toFixed(1)}%"></div></div>
+     <div class="val">${fmt(r.views)}</div></div>`).join("");
+  document.querySelector("#top-table tbody").innerHTML = d.topReels.map(r=>
+    `<tr><td>${r.rank}</td><td class="wrap"><a href="${r.url}" target="_blank" rel="noopener">${r.caption}</a></td><td>${r.date}</td>
+     <td class="num">${fmt(r.views)}</td><td class="num">${secs(r.avgWatchTimeMs)}</td>
+     <td class="num">${r.skipRate==null?"—":r.skipRate+"%"}</td>
+     <td class="num">${fmt(r.likes)}</td><td class="num">${r.likeRate==null?"—":r.likeRate+"%"}</td>
+     <td class="num">${fmt(r.shares)}</td><td class="num">${r.shareRate==null?"—":r.shareRate+"%"}</td>
+     <td class="num">${fmt(r.saves)}</td><td class="num">${fmt(r.reposts)}</td>
+     <td class="num">${fmt(r.comments)}</td><td class="num">${fmt(r.follows)}</td></tr>`).join("");
+  const dates = d.race.dates;
+  const series = [
+    {values: d.race.fisher, color: "#7c5cbf"},
+    {values: d.race.vulnerability, color: "#2a9d8f"},
+  ];
+  const W=920, H=260, P={l:64,r:14,t:14,b:28};
+  const all = d.race.fisher.concat(d.race.vulnerability);
+  let min = Math.min(...all), max = Math.max(...all);
+  const pad = (max-min)*0.08 || 1; min-=pad; max+=pad;
+  const n = dates.length;
+  const x = i => P.l + (W-P.l-P.r)*i/(n-1);
+  const y = v => P.t + (H-P.t-P.b)*(1-(v-min)/(max-min));
+  const grid = [0.25,0.5,0.75].map(f=>{
+    const v = min+(max-min)*f;
+    return `<line x1="${P.l}" y1="${y(v)}" x2="${W-P.r}" y2="${y(v)}" stroke="#eee" stroke-width="1"/>
+      <text x="${P.l-8}" y="${y(v)+4}" text-anchor="end" font-size="11" fill="#8a857e">${fmt(Math.round(v))}</text>`;
+  }).join("");
+  const labels = dates.map((dd,i)=>
+    `<text x="${x(i)}" y="${H-8}" text-anchor="middle" font-size="11" fill="#8a857e">${dd.slice(5)}</text>`).join("");
+  const paths = series.map(s=>{
+    const pts = s.values.map((v,i)=>`${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(" ");
+    const dots = s.values.map((v,i)=>`<circle cx="${x(i)}" cy="${y(v)}" r="3" fill="${s.color}"><title>${dates[i]}: ${fmt(v)}</title></circle>`).join("");
+    return `<polyline points="${pts}" fill="none" stroke="${s.color}" stroke-width="2.5" stroke-linejoin="round"/>${dots}`;
+  }).join("");
+  document.getElementById("chart-race").innerHTML =
+    `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img">${grid}${paths}${labels}</svg>`;
+}).catch(()=>{ document.getElementById("updated").textContent = "Could not load data.json"; });
+</script>
 </body>
 </html>
