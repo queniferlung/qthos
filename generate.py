@@ -1,26 +1,33 @@
 #!/usr/bin/env python3
-"""Build the @queniferlung dashboard data (v3).
+"""Build the @queniferlung dashboard data (v4).
+
+Range: Jul 15, 2026 onwards (all data from Jul 15).
 
 Sources:
-- Daily follower counts Jul 18-now (analytics-follower-count-delta --days 127).
+- Daily follower counts Jul 15-now (analytics-follower-count-delta --days 140,
+  merged with the previous data.json so the Jul 15 start is never lost as the
+  rolling window slides).
 - 90-day account time series (analytics-account-insights --include-time-series):
-  daily Views, Viewers, Interactions, Aug 24-now.
-- Jul 18-now window totals (account-insights --start-date/--end-date).
+  daily Views, Viewers, Interactions, Aug 27-now (Instagram keeps 90 days).
+- Jul 15-now window totals (account-insights --start-date 2026-07-15).
 - Daily snapshot payloads Nov 12-now (30 most recent reels + account totals).
-- Fresh per-reel insights for the top reels published on/after Jul 18
+- Fresh per-reel insights for the top reels published on/after Jul 15
   (top-reels-fresh.json) + thumbnails (thumbnails.json).
-- Full feed list (all_68_reels_views.json) for reels published per day.
+- Full feed list (all_68_reels_views.json) + latest snapshot payload for
+  monthly average views per reel by posting month.
+- Profile (latest *-profile.json): posts count, bio, verified badge.
 
-Instagram only keeps 90 days of daily Views history, so daily Views charts
-start Aug 24 even though the dashboard range starts Jul 18. Follower counts
-go back to Jul 18 via the follower-delta series.
+Lifetime views chart is cumulative: the Jul 15-Aug 26 lump (window total
+minus the sum of daily views) plus the running sum of daily views from
+Aug 27, so the line ends at the true window total.
 """
-import json, glob, os
+import base64, json, glob, os
 from datetime import date, timedelta
-from collections import Counter
+from collections import Counter, defaultdict
 
 BASE = "/home/hatch/workspace/goals/instagram-reels-tracker/files"
 DASH = "/home/hatch/workspace/instagram-dashboard"
+START = "2026-07-15"
 
 def first_val(lst):
     if isinstance(lst, list) and lst and isinstance(lst[0], dict):
@@ -30,12 +37,23 @@ def first_val(lst):
 def latest(pattern):
     return sorted(glob.glob(pattern))[-1]
 
-# ---- Daily follower counts, Jul 18-now ----
+# ---- Daily follower counts, Jul 15-now (merge with previous data.json) ----
 fds = json.load(open(latest(f"{BASE}/*-follower-daily-series.json")))
-followers_daily = [
-    {"date": p["date"], "followers": p["followers_count"], "change": p.get("daily_change")}
+fresh_fd = {
+    p["date"]: {"date": p["date"], "followers": p["followers_count"], "change": p.get("daily_change")}
     for p in fds["accounts"][0]["daily_series"]
-]
+}
+merged_fd = {}
+old_path = f"{DASH}/data.json"
+if os.path.exists(old_path):
+    try:
+        old = json.load(open(old_path))
+        for p in old.get("followersDaily", []):
+            merged_fd[p["date"]] = p
+    except Exception:
+        pass
+merged_fd.update(fresh_fd)
+followers_daily = [merged_fd[d] for d in sorted(merged_fd) if d >= START]
 
 # ---- 90-day daily series (latest pull) ----
 ts = json.load(open(latest(f"{BASE}/*-account-90d-timeseries.json")))
@@ -47,10 +65,10 @@ daily = {
     "netFollowers": acct.get("net_followers_over_time", {}).get("overall", []),
 }
 
-# ---- Jul 18-now window totals (latest pull) ----
-jul = json.load(open(latest(f"{BASE}/*-account-jul18-*.json")))
+# ---- Jul 15-now window totals (latest pull) ----
+jul = json.load(open(latest(f"{BASE}/*-account-jul15-*.json")))
 window_totals = {
-    "start": "2026-07-18",
+    "start": START,
     "end": None,  # displayed as "to now"; see latest snapshot date below
     "contentViews": first_val(jul.get("content_views")),
     "viewers": first_val(jul.get("viewers")),
@@ -80,25 +98,61 @@ for d in payloads:
         "totalLikes30": sum((r.get("likes") or 0) for r in reels),
     })
 latest_date = series[-1]["date"]
-window_totals["end"] = latest_date  # window runs Jul 18 to the latest snapshot ("to now")
+window_totals["end"] = latest_date  # window runs Jul 15 to the latest snapshot ("to now")
 
-# ---- Reels published per day, Jul 18-latest ----
+# ---- Reels published per day, Jul 15-latest ----
 raw68 = json.load(open("/home/hatch/workspace/all_68_reels_views.json"))
 by_id = {r["post_id"]: r for r in raw68["reels"]}
 counts = Counter()
 for r in raw68["reels"]:
     dd = (r.get("date") or "")[:10]
-    if "2026-07-18" <= dd <= latest_date:
+    if START <= dd <= latest_date:
         counts[dd] += 1
 reels_per_day = []
-d = date(2026, 7, 18)
+d = date(2026, 7, 15)
 end = date.fromisoformat(latest_date)
 while d <= end:
     ds = d.isoformat()
     reels_per_day.append({"date": ds, "count": counts.get(ds, 0)})
     d += timedelta(days=1)
 
-# ---- Top reels (published on/after Jul 18), fresh insights + thumbnails ----
+# ---- Monthly average views per reel, by posting month (Jul-Nov) ----
+# Combined set: full 68-reel list (Nov 7 vintage) overlaid with the latest
+# snapshot's 30 most recent reels (fresh views). Average = lifetime views
+# per reel posted that month, as of the latest snapshot.
+combined = {}
+for r in raw68["reels"]:
+    combined[r["post_id"]] = {"date": (r.get("date") or "")[:10], "views": r.get("views") or 0}
+for r in payloads[-1]["reels"]:
+    combined[r["post_id"]] = {"date": (r.get("published_at") or "")[:10], "views": r.get("views") or 0}
+by_month = defaultdict(list)
+for r in combined.values():
+    dd = r["date"]
+    if START <= dd <= latest_date:
+        by_month[dd[:7]].append(r["views"])
+MONTH_NAMES = {"07": "Jul", "08": "Aug", "09": "Sep", "10": "Oct", "11": "Nov"}
+MONTH_FULL = {"07": "July", "08": "August", "09": "September", "10": "October", "11": "November"}
+monthly_avg = []
+for ym in sorted(by_month):
+    vals = by_month[ym]
+    mm = ym[5:7]
+    monthly_avg.append({
+        "month": MONTH_NAMES.get(mm, mm),
+        "label": f"{MONTH_FULL.get(mm, mm)} 2026",
+        "avgViews": round(sum(vals) / len(vals)),
+        "reels": len(vals),
+    })
+
+# ---- Lifetime views, cumulative (lump Jul 15-Aug 26 + daily from Aug 27) ----
+daily_sum = sum((p.get("value") or 0) for p in daily["views"])
+lump = (window_totals["contentViews"] or 0) - daily_sum
+cum = lump
+lifetime_cumulative = []
+for p in daily["views"]:
+    cum += p.get("value") or 0
+    lifetime_cumulative.append({"date": p["date"], "value": cum})
+
+# ---- Top reels (published on/after Jul 15), fresh insights + thumbnails ----
 thumbs = json.load(open(f"{DASH}/thumbnails.json")) if os.path.exists(f"{DASH}/thumbnails.json") else {}
 fresh = json.load(open(f"{DASH}/top-reels-fresh.json"))
 fresh.sort(key=lambda r: r.get("views") or 0, reverse=True)
@@ -133,16 +187,39 @@ for i, r in enumerate(fresh[:10]):
         "follows": r.get("follows"),
     })
 
+# ---- Profile (latest profile pull) ----
+profile = {"posts": None, "bio": "helping you become a systems thinker — turning messy ideas into diagrams",
+           "verified": False, "following": None}
+prof_files = sorted(glob.glob(f"{BASE}/*-profile.json"))
+if prof_files:
+    try:
+        p = json.load(open(prof_files[-1]))["profiles"][0]
+        profile = {
+            "posts": p.get("post_count"),
+            "bio": p.get("bio") or profile["bio"],
+            "verified": bool(p.get("is_verified")),
+            "following": p.get("following_count"),
+        }
+    except Exception:
+        pass
+pic_b64 = None
+pic_path = "/home/hatch/workspace/profile-images/user-profile-reference.jpg"
+if os.path.exists(pic_path):
+    pic_b64 = "data:image/jpeg;base64," + base64.b64encode(open(pic_path, "rb").read()).decode()
+
 latest = payloads[-1]
 data = {
     "generatedAt": latest["captured_at"],
     "username": "queniferlung",
     "displayName": "Quen",
-    "bio": "helping you become a systems thinker — turning messy ideas into diagrams",
-    "rangeStart": "2026-07-18",
+    "bio": profile["bio"],
+    "profile": {**profile, "profilePic": pic_b64},
+    "rangeStart": START,
     "followersDaily": followers_daily,
     "reelsPerDay": reels_per_day,
     "daily": daily,
+    "lifetimeCumulative": lifetime_cumulative,
+    "monthlyAvgViews": monthly_avg,
     "windowTotals": window_totals,
     "series": series,
     "topReels": top,
@@ -165,5 +242,9 @@ with open(f"{DASH}/data.json", "w") as f:
 print("followers daily:", len(followers_daily), followers_daily[0], "->", followers_daily[-1])
 print("reels per day points:", len(reels_per_day), "total reels:", sum(p["count"] for p in reels_per_day))
 print("daily views points:", len(daily["views"]))
+print("lifetime cumulative:", len(lifetime_cumulative), "lump Jul 15-Aug 26:", lump,
+      "->", lifetime_cumulative[-1] if lifetime_cumulative else None)
+print("monthly avg:", [(m["month"], m["avgViews"], m["reels"]) for m in monthly_avg])
+print("profile:", {k: v for k, v in profile.items() if k != "bio"}, "| pic:", bool(pic_b64))
 print("top reel:", top[0]["caption"], top[0]["views"], "| thumbs:", sum(1 for r in top if r["thumbnail"]), "of", len(top))
 print("data.json written")
