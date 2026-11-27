@@ -175,7 +175,14 @@ h1 {
 .links a:hover, .links a:focus-visible { background: var(--ink); color: var(--parchment); }
 
 /* Gallery */
-main { max-width: 1120px; margin: 0 auto; padding: 0 24px 96px; }
+/* Section 2 sits on one big rounded panel over the video */
+main {
+  width: min(1168px, calc(100% - 48px));
+  margin: 0 auto 72px;
+  padding: 48px 40px 56px;
+  background: rgba(247, 240, 226, 0.95);
+  border-radius: 28px;
+}
 
 .section-title {
   display: flex;
@@ -193,9 +200,8 @@ main { max-width: 1120px; margin: 0 auto; padding: 0 24px 96px; }
   content: "";
   flex: 1;
   height: 1px;
-  background: rgba(255, 255, 255, 0.8);
+  background: var(--gold);
 }
-.section-title { color: #fff; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.55), 0 2px 18px rgba(0, 0, 0, 0.45); }
 
 .gallery {
   list-style: none;
@@ -213,7 +219,7 @@ main { max-width: 1120px; margin: 0 auto; padding: 0 24px 96px; }
 .more-btn {
   appearance: none;
   cursor: pointer;
-  background: rgba(247, 240, 226, 0.95);
+  background: transparent;
   color: var(--ink);
   font-family: "Cinzel", serif;
   font-size: 13px;
@@ -226,15 +232,7 @@ main { max-width: 1120px; margin: 0 auto; padding: 0 24px 96px; }
 }
 .more-btn:hover, .more-btn:focus-visible { background: var(--ink); color: var(--parchment); }
 
-.card {
-  display: block;
-  height: 100%;
-  padding: 14px 14px 18px;
-  text-decoration: none;
-  text-align: center;
-  background: rgba(247, 240, 226, 0.95);
-  border-radius: 22px;
-}
+.card { display: block; text-decoration: none; text-align: center; }
 
 /* arched niche, like a framed alcove */
 .frame {
@@ -307,7 +305,7 @@ footer a:hover { color: var(--terracotta); }
   .tile-label { font-size: 15px; }
   .tile-value { font-size: 22px; }
   .section-title { font-size: 13px; letter-spacing: 0.18em; gap: 12px; margin-bottom: 36px; }
-  main { padding-left: 16px; padding-right: 16px; }
+  main { width: calc(100% - 24px); margin: 0 auto 40px; padding: 32px 14px 36px; border-radius: 22px; }
   .gallery-more { margin-top: 32px; }
   .more-wrap { margin-top: 36px; }
 }
