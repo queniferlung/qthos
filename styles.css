@@ -34,7 +34,7 @@ a { color: inherit; }
   position: relative;
   overflow: hidden;
   margin-bottom: 72px;
-  background: #6c9a4a; /* shown until the video loads */
+  background: #4f7f3a; /* shown until the video loads */
 }
 .stage-video {
   position: absolute;
