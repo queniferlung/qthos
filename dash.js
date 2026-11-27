@@ -57,7 +57,7 @@
     const monthlyAvg = months.reduce((t, m) => t + m.views, 0) / months.length;
 
     document.getElementById("dash-range").textContent =
-      "Since " + since + " · updated " + day(data.updated);
+      "Updated " + day(data.updated);
 
     return [
       {
