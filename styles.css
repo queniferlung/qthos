@@ -11,6 +11,11 @@
 
 html { scroll-behavior: smooth; }
 
+/* Whole page at 80% on larger screens */
+@media (min-width: 861px) {
+  html { zoom: 0.8; }
+}
+
 body {
   margin: 0;
   overflow-x: hidden;

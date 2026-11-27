@@ -182,11 +182,12 @@
       tip.firstChild.textContent = full(p.value);
       tip.lastChild.textContent = p.label + " · " + (p.extra || m.unit);
       tip.hidden = false;
-      const scale = box.width / W;
-      const left = x(i) * scale;
-      const flip = left > box.width / 2;
+      // Layout pixels, not screen pixels, so this stays right when the page is zoomed.
+      const width = svg.clientWidth;
+      const left = x(i) * (width / W);
+      const flip = left > width / 2;
       tip.style.left = flip ? "" : left + 12 + "px";
-      tip.style.right = flip ? box.width - left + 12 + "px" : "";
+      tip.style.right = flip ? width - left + 12 + "px" : "";
     }
     function leave() {
       cross.setAttribute("visibility", "hidden"); dot.setAttribute("visibility", "hidden");
