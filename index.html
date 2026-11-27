@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cinzel:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=202611271457">
 </head>
 <body>
   <div class="meander" aria-hidden="true"></div>
@@ -69,9 +69,56 @@
         <div class="frame"><img src="img/Ddxbf41psbg.jpg" alt="" loading="lazy" width="640" height="1138"></div>
         <p class="num">XII</p><h3>The desire to feel seen &amp; understood</h3><p class="views">71K views</p><p class="meta">September 2026</p></a></li>
     </ol>
+
+    <ol class="gallery gallery-more" id="more-reels" start="13" hidden>
+      <li><a class="card" href="https://www.instagram.com/reel/DfXcL42Kd7L/" target="_blank" rel="noopener">
+        <div class="frame"><img src="img/DfXcL42Kd7L.jpg" alt="" loading="lazy" width="640" height="1138"></div>
+        <p class="num">XIII</p><h3>Overcoming imposter syndrome</h3><p class="views">58K views</p><p class="meta">November 2026</p></a></li>
+      <li><a class="card" href="https://www.instagram.com/reel/Df6pwFDqUUW/" target="_blank" rel="noopener">
+        <div class="frame"><img src="img/Df6pwFDqUUW.jpg" alt="" loading="lazy" width="640" height="1138"></div>
+        <p class="num">XIV</p><h3>Be kind and giving in a transactional world</h3><p class="views">53K views</p><p class="meta">November 2026</p></a></li>
+      <li><a class="card" href="https://www.instagram.com/reel/DgOSQIuvn1G/" target="_blank" rel="noopener">
+        <div class="frame"><img src="img/DgOSQIuvn1G.jpg" alt="" loading="lazy" width="640" height="1138"></div>
+        <p class="num">XV</p><h3>Position yourself better</h3><p class="views">44K views</p><p class="meta">November 2026</p></a></li>
+      <li><a class="card" href="https://www.instagram.com/reel/DgGUlZiSnWQ/" target="_blank" rel="noopener">
+        <div class="frame"><img src="img/DgGUlZiSnWQ.jpg" alt="" loading="lazy" width="640" height="1138"></div>
+        <p class="num">XVI</p><h3>Living up to your potential</h3><p class="views">36K views</p><p class="meta">November 2026</p></a></li>
+      <li><a class="card" href="https://www.instagram.com/reel/Dfpu_cQKwOs/" target="_blank" rel="noopener">
+        <div class="frame"><img src="img/Dfpu_cQKwOs.jpg" alt="" loading="lazy" width="640" height="1138"></div>
+        <p class="num">XVII</p><h3>Where your intuition actually comes from</h3><p class="views">28K views</p><p class="meta">November 2026</p></a></li>
+      <li><a class="card" href="https://www.instagram.com/reel/DffdIqmqfuI/" target="_blank" rel="noopener">
+        <div class="frame"><img src="img/DffdIqmqfuI.jpg" alt="" loading="lazy" width="640" height="1138"></div>
+        <p class="num">XVIII</p><h3>Being alone vs feeling lonely</h3><p class="views">26K views</p><p class="meta">November 2026</p></a></li>
+      <li><a class="card" href="https://www.instagram.com/reel/DewGXoiK-qu/" target="_blank" rel="noopener">
+        <div class="frame"><img src="img/DewGXoiK-qu.jpg" alt="" loading="lazy" width="640" height="1138"></div>
+        <p class="num">XIX</p><h3>Living in the moment in modern life</h3><p class="views">22K views</p><p class="meta">October 2026</p></a></li>
+      <li><a class="card" href="https://www.instagram.com/reel/DfIvMrRPYkV/" target="_blank" rel="noopener">
+        <div class="frame"><img src="img/DfIvMrRPYkV.jpg" alt="" loading="lazy" width="640" height="1138"></div>
+        <p class="num">XX</p><h3>Being kind can help you prove your point</h3><p class="views">18K views</p><p class="meta">October 2026</p></a></li>
+      <li><a class="card" href="https://www.instagram.com/reel/DfDEphUPGYT/" target="_blank" rel="noopener">
+        <div class="frame"><img src="img/DfDEphUPGYT.jpg" alt="" loading="lazy" width="640" height="1138"></div>
+        <p class="num">XXI</p><h3>Finding yourself &amp; self-actualization</h3><p class="views">18K views</p><p class="meta">October 2026</p></a></li>
+      <li><a class="card" href="https://www.instagram.com/reel/DgJSFcwMoqb/" target="_blank" rel="noopener">
+        <div class="frame"><img src="img/DgJSFcwMoqb.jpg" alt="" loading="lazy" width="640" height="1138"></div>
+        <p class="num">XXII</p><h3>Improving your weaknesses</h3><p class="views">17K views</p><p class="meta">November 2026</p></a></li>
+    </ol>
+
+    <p class="more-wrap"><button type="button" class="more-btn" id="more-btn" aria-expanded="false" aria-controls="more-reels">See more</button></p>
   </main>
 
   <div class="meander" aria-hidden="true"></div>
-  <script src="dash.js" defer></script>
+  <script src="dash.js?v=202611271457" defer></script>
+  <script>
+    (function () {
+      var btn = document.getElementById("more-btn");
+      var more = document.getElementById("more-reels");
+      btn.addEventListener("click", function () {
+        var open = more.hidden;
+        more.hidden = !open;
+        btn.setAttribute("aria-expanded", String(open));
+        btn.textContent = open ? "See less" : "See more";
+      });
+    })();
+  </script>
 </body>
 </html>
