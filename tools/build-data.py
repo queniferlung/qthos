@@ -69,10 +69,11 @@ def main(views_path, followers_path, content_path=None):
     if not views or not followers:
         sys.exit("No rows found: check the two input files.")
 
-    monthly, content = [], []
+    monthly, content, lifetime = [], [], None
     if os.path.exists(OUT):
         previous = json.load(open(OUT, encoding="utf-8"))
         monthly = previous.get("monthly", [])
+        lifetime = previous.get("lifetimeViews")
         content = previous.get("content", [])
 
     if content_path:
@@ -103,6 +104,10 @@ def main(views_path, followers_path, content_path=None):
         "content": content,
         "monthly": monthly,
     }
+    if lifetime:
+        # Lifetime total as Instagram shows it, set by hand in data.json. The
+        # page fits the early no-daily-data period to make the graph reach it.
+        data["lifetimeViews"] = lifetime
     with open(OUT, "w", encoding="utf-8") as f:
         json.dump(data, f, separators=(",", ":"))
         f.write("\n")

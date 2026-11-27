@@ -41,7 +41,11 @@
     const since = day(data.since);
 
     const lump = data.viewsLump;
-    let running = lump.views;
+    // If a lifetime total is given, the early period with no daily data absorbs
+    // the difference so the daily rows still add up to it.
+    const dailyTotal = views.reduce((t, r) => t + r[1], 0);
+    const lumpViews = data.lifetimeViews ? Math.max(0, data.lifetimeViews - dailyTotal) : lump.views;
+    let running = lumpViews;
     // No daily views exist for the lump period, so its shape is estimated:
     // the known total is shared out day by day in proportion to follower gains.
     const t0 = tday(lump.from);
@@ -61,7 +65,7 @@
     const estimated = weights.map((w, i) => {
       share += w + floor;
       const d = new Date((t0 + i) * 864e5).toISOString().slice(0, 10);
-      return { label: day(d), t: t0 + i, value: (lump.views * share) / totalWeight, extra: "estimated total" };
+      return { label: day(d), t: t0 + i, value: (lumpViews * share) / totalWeight, extra: "estimated total" };
     });
     const lifetime = [{ label: day(lump.from), t: t0 - 1, value: 0, extra: "estimated total" }]
       .concat(estimated)
@@ -80,7 +84,7 @@
 
     return [
       {
-        label: "Views",
+        label: "Lifetime views",
         value: full(running),
         sub: "since " + since,
         unit: "views in total",
