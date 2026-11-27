@@ -181,8 +181,8 @@ main { max-width: 1120px; margin: 0 auto; padding: 0 24px 96px; }
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 64px 44px;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 56px 28px;
 }
 
 .card { display: block; text-decoration: none; text-align: center; }
@@ -221,7 +221,7 @@ main { max-width: 1120px; margin: 0 auto; padding: 0 24px 96px; }
 .card h3 {
   margin: 0;
   font-weight: 500;
-  font-size: 25px;
+  font-size: 21px;
   line-height: 1.2;
   text-wrap: balance;
 }
@@ -246,10 +246,11 @@ footer a:hover { color: var(--terracotta); }
 .fine { margin-top: 10px; font-size: 15px; color: var(--ink-soft); }
 
 @media (max-width: 860px) {
-  .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 44px 18px; }
+  .gallery { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 36px 14px; }
   .hero { padding: 40px 16px 52px; }
   .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .card h3 { font-size: 21px; }
+  .card h3 { font-size: 18px; }
+  .frame { padding: 5px; }
   .rule span { width: 56px; }
 }
 
