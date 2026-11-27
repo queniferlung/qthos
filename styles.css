@@ -11,10 +11,10 @@
 
 html { scroll-behavior: smooth; }
 
-/* Whole page scale: 117% on phones, 94% on larger screens */
-html { zoom: 1.17; }
+/* Whole page scale: 125% on phones, 132% on larger screens */
+html { zoom: 1.25; }
 @media (min-width: 861px) {
-  html { zoom: 0.94; }
+  html { zoom: 1.32; }
 }
 
 body {
@@ -246,12 +246,17 @@ footer a:hover { color: var(--terracotta); }
 .fine { margin-top: 10px; font-size: 15px; color: var(--ink-soft); }
 
 @media (max-width: 860px) {
-  .gallery { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 36px 14px; }
+  .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 12px; }
   .hero { padding: 40px 16px 52px; }
   .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .card h3 { font-size: 18px; }
   .frame { padding: 5px; }
   .rule span { width: 56px; }
+  .tile { padding: 12px 12px 10px; border-radius: 14px; }
+  .tile-label { font-size: 15px; }
+  .tile-value { font-size: 22px; }
+  .section-title { font-size: 13px; letter-spacing: 0.18em; gap: 12px; margin-bottom: 36px; }
+  main { padding-left: 16px; padding-right: 16px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
