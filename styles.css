@@ -48,6 +48,11 @@ a { color: inherit; }
 
 .dash { text-align: left; }
 
+/* Stats section at 65% on larger screens; the reels below keep their size */
+@media (min-width: 861px) {
+  .hero { zoom: 0.65; }
+}
+
 .dash-head {
   display: flex;
   align-items: baseline;
