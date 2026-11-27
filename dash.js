@@ -67,8 +67,7 @@
         unit: "views in total",
         points: lifetime,
         dashedTo: 1,
-        note: "Running total of account views. Instagram keeps 90 days of daily data, so " +
-          day(lump.from) + " – " + day(lump.to) + " is one total, drawn as a dotted line.",
+        note: day(lump.from) + " – " + day(lump.to) + " is a single total, shown dotted.",
       },
       {
         label: "Followers growth",
