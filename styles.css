@@ -175,6 +175,11 @@ h1 {
 .links a:hover, .links a:focus-visible { background: var(--ink); color: var(--parchment); }
 
 /* Gallery */
+/* Reels section at 88% on larger screens */
+@media (min-width: 861px) {
+  main { zoom: 0.88; }
+}
+
 /* Section 2 sits on one big rounded panel over the video */
 main {
   width: min(1168px, calc(100% - 48px));
