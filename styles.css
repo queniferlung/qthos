@@ -234,8 +234,9 @@ main { max-width: 1120px; margin: 0 auto; padding: 0 24px 96px; }
 .num {
   margin: 20px 0 2px;
   font-family: "Cinzel", serif;
-  font-size: 13px;
-  letter-spacing: 0.3em;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  font-variant-numeric: lining-nums;
   color: var(--terracotta);
 }
 .card h3 {
