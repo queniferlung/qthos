@@ -219,8 +219,14 @@ main { max-width: 1120px; margin: 0 auto; padding: 0 24px 96px; }
   line-height: 1.2;
   text-wrap: balance;
 }
-.meta {
+.views {
   margin: 8px 0 0;
+  font-size: 17px;
+  font-weight: 600;
+  font-variant-numeric: lining-nums;
+}
+.meta {
+  margin: 2px 0 0;
   font-size: 16px;
   font-style: italic;
   color: var(--ink-soft);
