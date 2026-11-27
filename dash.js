@@ -39,14 +39,7 @@
   function build(data) {
     const views = data.views;
     const followers = data.followers;
-    const lump = data.viewsLump;
     const since = day(data.since);
-
-    let running = lump.views;
-    const lifetime = [
-      { label: day(lump.from), t: tday(lump.from), value: 0 },
-      { label: day(lump.to), t: tday(lump.to), value: lump.views },
-    ].concat(views.map(([d, v]) => ({ label: day(d), t: tday(d), value: (running += v) })));
 
     const sum = (rows) => rows.reduce((t, r) => t + r[1], 0);
     const last30 = sum(views.slice(-30));
@@ -61,14 +54,13 @@
 
     return [
       {
-        label: "Lifetime views",
-        value: full(running),
+        label: "Views",
+        value: full(sum(data.content)),
         sub: "since " + since,
-        unit: "views in total",
-        points: lifetime,
-        dashedTo: 1,
-        note: "Instagram keeps 90 days of daily data, so " + day(lump.from) + " – " + day(lump.to) +
-          " is one total (" + full(lump.views) + " views), drawn as a dotted line.",
+        unit: "views on content posted that day",
+        points: data.content.map(([d, v]) => ({ label: day(d), t: tday(d), value: v })),
+        note: "Views on the content posted each day, from the Instagram content export. " +
+          "Crossposted reels with no view count in the export are not included.",
       },
       {
         label: "Followers growth",

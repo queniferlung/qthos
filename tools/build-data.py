@@ -7,17 +7,20 @@ Usage:
 VIEWS.html and FOLLOWERS.html are the daily "Views by day" and "Followers by
 day" tables from the stats email.
 
-"monthly" in data.json is the total views on everything posted in each month.
-It is carried over unchanged unless CONTENT.csv is given: an Instagram
-"Content insights" export (about the last 30 days). Its newest publish month is
-then set to the sum of that month's Views column; older months are left alone,
-because the export only covers part of them.
+CONTENT.csv is an Instagram "Content insights" export. When given, it sets:
+  - "content": views per publish day (the sum of the Views column for
+    everything posted that day, zero for days with no posts). This feeds the
+    "Views" tile. Rows with a blank Views cell count as zero.
+  - "monthly": the newest publish month is set to that month's Views sum.
+    Older months are left alone, so hand-filled figures survive.
+Without CONTENT.csv both are carried over unchanged from data.json.
 """
 import csv, json, os, re, sys
-from datetime import date
+from datetime import date, timedelta
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "data.json")
+SINCE = "2026-07-15"
 ROW = re.compile(r"<tr[^>]*>(.*?)</tr>", re.S)
 CELL = re.compile(r"<td[^>]*>(.*?)</td>", re.S)
 DAY = re.compile(r"(\d{4}-\d{2}-\d{2})")
@@ -35,18 +38,17 @@ def rows(path):
             yield cells
 
 
-def month_total(csv_path):
-    """(month, views) for the newest publish month in a Content insights CSV."""
-    totals = {}
+def content_views(csv_path):
+    """{publish day: views} from a Content insights CSV."""
+    days = {}
     with open(csv_path, encoding="utf-8-sig", newline="") as f:
         for row in csv.DictReader(f):
-            month = (row.get("Publish date") or "")[:7]
-            if month:
-                totals[month] = totals.get(month, 0) + int(row.get("Views") or 0)
-    if not totals:
+            day = (row.get("Publish date") or "")[:10]
+            if DAY.fullmatch(day):
+                days[day] = days.get(day, 0) + int((row.get("Views") or "0").strip() or 0)
+    if not days:
         sys.exit("No rows found in the content CSV.")
-    newest = max(totals)
-    return newest, totals[newest]
+    return days
 
 
 def main(views_path, followers_path, content_path=None):
@@ -67,12 +69,22 @@ def main(views_path, followers_path, content_path=None):
     if not views or not followers:
         sys.exit("No rows found: check the two input files.")
 
-    monthly = []
+    monthly, content = [], []
     if os.path.exists(OUT):
-        monthly = json.load(open(OUT, encoding="utf-8")).get("monthly", [])
+        previous = json.load(open(OUT, encoding="utf-8"))
+        monthly = previous.get("monthly", [])
+        content = previous.get("content", [])
 
     if content_path:
-        month, total = month_total(content_path)
+        days = content_views(content_path)
+        updated = max(views[-1][0], followers[-1][0])
+        day, last = date.fromisoformat(SINCE), date.fromisoformat(max(updated, max(days)))
+        content = []
+        while day <= last:
+            content.append([day.isoformat(), days.get(day.isoformat(), 0)])
+            day += timedelta(days=1)
+        month = max(days)[:7]
+        total = sum(v for d, v in days.items() if d.startswith(month))
         for entry in monthly:
             if entry["month"] == month:
                 entry["views"] = total
@@ -84,10 +96,11 @@ def main(views_path, followers_path, content_path=None):
 
     data = {
         "updated": max(views[-1][0], followers[-1][0]),
-        "since": "2026-07-15",
+        "since": SINCE,
         "viewsLump": {"from": "2026-07-15", "to": _day_before(views[0][0]), "views": lump},
         "views": views,
         "followers": followers,
+        "content": content,
         "monthly": monthly,
     }
     with open(OUT, "w", encoding="utf-8") as f:
