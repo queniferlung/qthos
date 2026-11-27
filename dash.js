@@ -137,7 +137,7 @@
   function draw() {
     const m = metrics[current];
     const pts = m.points;
-    const W = Math.max(320, svg.parentNode.clientWidth);
+    const W = Math.max(280, svg.clientWidth || svg.parentNode.clientWidth);
     const H = Math.round(Math.min(360, Math.max(240, W * 0.42)));
     const pad = { l: 58, r: 18, t: 14, b: 34 };
     const iw = W - pad.l - pad.r;

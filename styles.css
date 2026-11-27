@@ -29,20 +29,11 @@ body {
 
 a { color: inherit; }
 
-/* Greek key border */
-.meander {
-  height: 24px;
-  background-color: var(--ink);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='24' viewBox='0 0 32 24'%3E%3Cpath d='M0 20h28V4H8v10h12v-4h-6' fill='none' stroke='%23b08d4c' stroke-width='2'/%3E%3C/svg%3E");
-  background-repeat: repeat-x;
-  background-position: center;
-}
-
 /* Hero: dashboard */
 .hero {
   max-width: 880px;
   margin: 0 auto;
-  padding: 64px 24px 72px;
+  padding: 64px 24px 48px;
   text-align: center;
 }
 
@@ -106,7 +97,15 @@ h1 {
   font-variant-numeric: lining-nums;
 }
 
-.chart { position: relative; margin-top: 28px; }
+/* Rounded panel behind the graph so the line reads clearly */
+.chart {
+  position: relative;
+  margin-top: 20px;
+  padding: 24px 20px 14px 12px;
+  background: #fbf7ee;
+  border: 1px solid #e3d6bc;
+  border-radius: 20px;
+}
 #chart-svg { display: block; width: 100%; height: auto; overflow: visible; touch-action: pan-y; }
 .grid { stroke: #d9ccb3; stroke-width: 1; }
 .axis-text {
@@ -153,6 +152,16 @@ h1 {
   transition: background 0.2s, color 0.2s;
 }
 .links a:hover, .links a:focus-visible { background: var(--ink); color: var(--parchment); }
+
+/* Featured video under the stats */
+.feature { max-width: 797px; margin: 0 auto 72px; padding: 0 24px; } /* lines up with the stats column at 90% */
+.feature video {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  background: var(--parchment-deep);
+}
 
 /* Gallery */
 main { max-width: 1120px; margin: 0 auto; padding: 0 24px 96px; }
@@ -268,7 +277,9 @@ footer a:hover { color: var(--terracotta); }
 
 @media (max-width: 860px) {
   .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 12px; }
-  .hero { padding: 40px 16px 52px; }
+  .hero { padding: 40px 16px 36px; }
+  .feature { padding: 0 16px; margin-bottom: 48px; }
+  .chart { padding: 16px 10px 8px 4px; border-radius: 16px; }
   .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .card h3 { font-size: 18px; }
   .frame { padding: 5px; }
