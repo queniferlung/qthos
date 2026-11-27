@@ -85,7 +85,7 @@
     return [
       {
         label: "Lifetime views",
-        value: full(running),
+        value: data.lifetimeLabel || full(running),
         sub: "since " + since,
         unit: "views in total",
         points: lifetime,

@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cinzel:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261127150901">
+  <link rel="stylesheet" href="styles.css?v=20261127151239">
 </head>
 <body>
   <div class="meander" aria-hidden="true"></div>
@@ -100,16 +100,14 @@
   </main>
 
   <div class="meander" aria-hidden="true"></div>
-  <script src="dash.js?v=20261127150901" defer></script>
+  <script src="dash.js?v=20261127151239" defer></script>
   <script>
     (function () {
       var btn = document.getElementById("more-btn");
       var more = document.getElementById("more-reels");
       btn.addEventListener("click", function () {
-        var open = more.hidden;
-        more.hidden = !open;
-        btn.setAttribute("aria-expanded", String(open));
-        btn.textContent = open ? "See less" : "See more";
+        more.hidden = false;
+        btn.parentNode.hidden = true;
       });
     })();
   </script>
