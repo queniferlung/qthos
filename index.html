@@ -112,6 +112,26 @@
         if (v.currentTime >= end) v.currentTime = 0;
       });
     })();
+    // Browsers can refuse to autoplay (Low Power Mode, auto-play settings).
+    // Try again now, and failing that on the visitor's first click, tap or key press.
+    (function () {
+      var v = document.getElementById("stage-video");
+      v.muted = true;
+      function start() {
+        var p = v.play();
+        if (p && p.catch) p.catch(function () {});
+      }
+      function onFirstInput() {
+        start();
+        ["pointerdown", "touchstart", "keydown"].forEach(function (e) {
+          document.removeEventListener(e, onFirstInput);
+        });
+      }
+      start();
+      ["pointerdown", "touchstart", "keydown"].forEach(function (e) {
+        document.addEventListener(e, onFirstInput, { passive: true });
+      });
+    })();
     (function () {
       var btn = document.getElementById("more-btn");
       var more = document.getElementById("more-reels");
