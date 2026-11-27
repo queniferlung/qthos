@@ -9,7 +9,7 @@
 
 * { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; background: #4f7f3a; } /* colour shown until the video loads */
 
 /* Whole page scale. 1 = the design's natural size. */
 html { zoom: 1; }
@@ -17,9 +17,7 @@ html { zoom: 1; }
 body {
   margin: 0;
   overflow-x: hidden;
-  background:
-    radial-gradient(ellipse at 50% 0%, #f8f2e6 0%, transparent 60%),
-    var(--parchment);
+  background: transparent;
   color: var(--ink);
   font-family: "Cormorant Garamond", Garamond, "Times New Roman", serif;
   font-size: 20px;
@@ -29,34 +27,24 @@ body {
 
 a { color: inherit; }
 
-/* Section 1: stats over a full-width video background */
-.stage {
-  position: relative;
-  overflow: hidden;
-  margin-bottom: 72px;
-  background: #4f7f3a; /* shown until the video loads */
-}
-.stage-video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+/* The video is the background of the whole page, fixed while content scrolls */
+.page-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   object-fit: cover;
+  z-index: -1;
   pointer-events: none;
 }
-/* gentle darkening so the heading stays readable over bright sky */
-.stage::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(rgba(20, 16, 10, 0.34), rgba(20, 16, 10, 0.12) 45%, rgba(20, 16, 10, 0.3));
-  pointer-events: none;
-}
-.stage .hero { position: relative; z-index: 1; }
+
+/* Section 1: stats */
+.stage { position: relative; margin-bottom: 40px; }
 .stage h1,
 .stage .dash-range {
   color: #fff;
-  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.55), 0 2px 18px rgba(0, 0, 0, 0.45);
 }
 .stage .tile { background: rgba(247, 240, 226, 0.94); }
 .stage .tile:hover { background: #fff8ea; }
@@ -205,8 +193,9 @@ main { max-width: 1120px; margin: 0 auto; padding: 0 24px 96px; }
   content: "";
   flex: 1;
   height: 1px;
-  background: var(--gold);
+  background: rgba(255, 255, 255, 0.8);
 }
+.section-title { color: #fff; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.55), 0 2px 18px rgba(0, 0, 0, 0.45); }
 
 .gallery {
   list-style: none;
@@ -224,7 +213,7 @@ main { max-width: 1120px; margin: 0 auto; padding: 0 24px 96px; }
 .more-btn {
   appearance: none;
   cursor: pointer;
-  background: transparent;
+  background: rgba(247, 240, 226, 0.95);
   color: var(--ink);
   font-family: "Cinzel", serif;
   font-size: 13px;
@@ -237,7 +226,15 @@ main { max-width: 1120px; margin: 0 auto; padding: 0 24px 96px; }
 }
 .more-btn:hover, .more-btn:focus-visible { background: var(--ink); color: var(--parchment); }
 
-.card { display: block; text-decoration: none; text-align: center; }
+.card {
+  display: block;
+  height: 100%;
+  padding: 14px 14px 18px;
+  text-decoration: none;
+  text-align: center;
+  background: rgba(247, 240, 226, 0.95);
+  border-radius: 22px;
+}
 
 /* arched niche, like a framed alcove */
 .frame {

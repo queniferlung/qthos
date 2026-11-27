@@ -8,15 +8,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cinzel:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261127154133">
+  <link rel="stylesheet" href="styles.css?v=20261127155354">
 </head>
 <body>
 
+  <video class="page-video" id="stage-video" autoplay muted loop playsinline preload="auto" aria-hidden="true" tabindex="-1">
+    <source src="media/feature-5-small.mp4" type="video/mp4" media="(max-width: 860px)">
+    <source src="media/feature-5.mp4" type="video/mp4">
+  </video>
   <div class="stage">
-    <video class="stage-video" id="stage-video" autoplay muted loop playsinline preload="auto" aria-hidden="true" tabindex="-1">
-      <source src="media/feature-5-small.mp4" type="video/mp4" media="(max-width: 860px)">
-      <source src="media/feature-5.mp4" type="video/mp4">
-    </video>
   <header class="hero">
     <section class="dash" aria-label="Instagram performance">
       <div class="dash-head">
@@ -104,7 +104,7 @@
     <p class="more-wrap"><button type="button" class="more-btn" id="more-btn" aria-expanded="false" aria-controls="more-reels">See more</button></p>
   </main>
 
-  <script src="dash.js?v=20261127154133" defer></script>
+  <script src="dash.js?v=20261127155354" defer></script>
   <script>
     // The clip's last half-second is black, so restart it just before that.
     (function () {
