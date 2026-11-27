@@ -43,10 +43,31 @@
 
     const lump = data.viewsLump;
     let running = lump.views;
-    const lifetime = [
-      { label: day(lump.from), t: tday(lump.from), value: 0 },
-      { label: day(lump.to), t: tday(lump.to), value: lump.views },
-    ].concat(views.map(([d, v]) => ({ label: day(d), t: tday(d), value: (running += v) })));
+    // No daily views exist for the lump period, so its shape is estimated:
+    // the known total is shared out day by day in proportion to follower gains.
+    const t0 = tday(lump.from);
+    const t1 = tday(lump.to);
+    const weights = new Array(t1 - t0 + 1).fill(0);
+    for (let i = 1; i < followers.length; i++) {
+      const from = tday(followers[i - 1][0]);
+      const to = tday(followers[i][0]);
+      const gain = Math.max(0, followers[i][1] - followers[i - 1][1]) / (to - from);
+      for (let d = from + 1; d <= to; d++) {
+        if (d >= t0 && d <= t1) weights[d - t0] += gain;
+      }
+    }
+    const floor = weights.reduce((a, b) => a + b, 0) / weights.length / 4; // quiet days still get views
+    const totalWeight = weights.reduce((a, b) => a + b + floor, 0);
+    let share = 0;
+    const estimated = weights.map((w, i) => {
+      share += w + floor;
+      const d = new Date((t0 + i) * 864e5).toISOString().slice(0, 10);
+      return { label: day(d), t: t0 + i, value: (lump.views * share) / totalWeight, extra: "estimated total" };
+    });
+    const lifetime = [{ label: day(lump.from), t: t0 - 1, value: 0, extra: "estimated total" }]
+      .concat(estimated)
+      .concat(views.map(([d, v]) => ({ label: day(d), t: tday(d), value: (running += v) })));
+    const estimatedTo = estimated.length;
 
     const sum = (rows) => rows.reduce((t, r) => t + r[1], 0);
     const last30 = sum(views.slice(-30));
@@ -66,8 +87,8 @@
         sub: "since " + since,
         unit: "views in total",
         points: lifetime,
-        dashedTo: 1,
-        note: day(lump.from) + " – " + day(lump.to) + " is a single total, shown dotted.",
+        dashedTo: estimatedTo,
+        note: day(lump.from) + " – " + day(lump.to) + " is estimated from follower growth, shown dotted.",
       },
       {
         label: "Followers growth",
