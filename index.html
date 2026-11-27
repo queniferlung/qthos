@@ -8,10 +8,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cinzel:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261127153119">
+  <link rel="stylesheet" href="styles.css?v=20261127153256">
 </head>
 <body>
 
+  <div class="stage">
+    <video class="stage-video" src="media/feature.mp4" autoplay muted loop playsinline preload="auto" aria-hidden="true" tabindex="-1"></video>
   <header class="hero">
     <section class="dash" aria-label="Instagram performance">
       <div class="dash-head">
@@ -25,10 +27,7 @@
       </div>
     </section>
   </header>
-
-  <section class="feature" aria-label="Featured video">
-    <video src="media/feature.mp4" autoplay muted loop playsinline preload="metadata" width="960" height="540"></video>
-  </section>
+  </div>
 
   <main>
     <h2 class="section-title"><span>Top Performing Reels</span></h2>
@@ -102,7 +101,7 @@
     <p class="more-wrap"><button type="button" class="more-btn" id="more-btn" aria-expanded="false" aria-controls="more-reels">See more</button></p>
   </main>
 
-  <script src="dash.js?v=20261127153119" defer></script>
+  <script src="dash.js?v=20261127153256" defer></script>
   <script>
     (function () {
       var btn = document.getElementById("more-btn");

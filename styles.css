@@ -29,6 +29,39 @@ body {
 
 a { color: inherit; }
 
+/* Section 1: stats over a full-width video background */
+.stage {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 72px;
+  background: #4a6a5a; /* shown until the video loads */
+}
+.stage-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+/* gentle darkening so the heading stays readable over bright sky */
+.stage::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(20, 16, 10, 0.34), rgba(20, 16, 10, 0.12) 45%, rgba(20, 16, 10, 0.3));
+  pointer-events: none;
+}
+.stage .hero { position: relative; z-index: 1; }
+.stage h1,
+.stage .dash-range {
+  color: #fff;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.5);
+}
+.stage .tile { background: rgba(247, 240, 226, 0.94); }
+.stage .tile:hover { background: #fff8ea; }
+.stage .chart { background: rgba(251, 247, 238, 0.96); border-color: transparent; }
+
 /* Hero: dashboard */
 .hero {
   max-width: 880px;
@@ -153,16 +186,6 @@ h1 {
 }
 .links a:hover, .links a:focus-visible { background: var(--ink); color: var(--parchment); }
 
-/* Featured video under the stats */
-.feature { max-width: 797px; margin: 0 auto 72px; padding: 0 24px; } /* lines up with the stats column at 90% */
-.feature video {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: 20px;
-  background: var(--parchment-deep);
-}
-
 /* Gallery */
 main { max-width: 1120px; margin: 0 auto; padding: 0 24px 96px; }
 
@@ -278,7 +301,6 @@ footer a:hover { color: var(--terracotta); }
 @media (max-width: 860px) {
   .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 12px; }
   .hero { padding: 40px 16px 36px; }
-  .feature { padding: 0 16px; margin-bottom: 48px; }
   .chart { padding: 16px 10px 8px 4px; border-radius: 16px; }
   .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .card h3 { font-size: 18px; }
