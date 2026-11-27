@@ -9,7 +9,7 @@
 
 * { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; background: #4f7f3a; } /* colour shown until the video loads */
+html { scroll-behavior: smooth; background: #9a8a52; } /* colour shown until the video loads */
 
 /* Whole page scale. 1 = the design's natural size. */
 html { zoom: 1; }
