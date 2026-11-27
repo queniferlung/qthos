@@ -81,7 +81,7 @@
       {
         label: "Monthly average views",
         value: full(monthlyAvg),
-        sub: "per month · " + months[0].name + " – " + months[months.length - 1].name,
+        sub: "",
         unit: "total views",
         points: months.map((m) => ({ label: m.name, value: m.views })),
         markers: true,
@@ -103,7 +103,7 @@
         '<span class="tile-label"></span><span class="tile-value"></span><span class="tile-sub"></span>';
       b.children[0].textContent = m.label;
       b.children[1].textContent = m.value;
-      b.children[2].textContent = m.sub;
+      b.children[2].textContent = m.sub || "\u00a0"; // keep tile heights equal
       b.addEventListener("click", () => { current = i; renderTiles(); draw(); });
       tiles.appendChild(b);
     });
@@ -133,7 +133,7 @@
 
     svg.innerHTML = "";
     svg.setAttribute("viewBox", "0 0 " + W + " " + H);
-    svg.setAttribute("aria-label", m.label + ": " + m.value + ", " + m.sub);
+    svg.setAttribute("aria-label", m.label + ": " + m.value + (m.sub ? ", " + m.sub : ""));
     note.textContent = m.note;
     tip.hidden = true;
 

@@ -11,10 +11,10 @@
 
 html { scroll-behavior: smooth; }
 
-/* Whole page scaled down: 90% on phones, 72% on larger screens */
-html { zoom: 0.9; }
+/* Whole page scale: 117% on phones, 94% on larger screens */
+html { zoom: 1.17; }
 @media (min-width: 861px) {
-  html { zoom: 0.72; }
+  html { zoom: 0.94; }
 }
 
 body {
