@@ -181,8 +181,8 @@ main { max-width: 1120px; margin: 0 auto; padding: 0 24px 96px; }
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 56px 28px;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 52px 24px;
 }
 
 .card { display: block; text-decoration: none; text-align: center; }
@@ -221,7 +221,7 @@ main { max-width: 1120px; margin: 0 auto; padding: 0 24px 96px; }
 .card h3 {
   margin: 0;
   font-weight: 500;
-  font-size: 21px;
+  font-size: 19px;
   line-height: 1.2;
   text-wrap: balance;
 }
