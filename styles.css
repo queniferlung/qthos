@@ -48,9 +48,9 @@ a { color: inherit; }
 
 .dash { text-align: left; }
 
-/* Stats section at 86% on larger screens; the reels below keep their size */
+/* Stats section at 90% on larger screens; the reels below keep their size */
 @media (min-width: 861px) {
-  .hero { zoom: 0.86; }
+  .hero { zoom: 0.9; }
 }
 
 .dash-head {
