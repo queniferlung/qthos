@@ -50,12 +50,11 @@
 
     const sum = (rows) => rows.reduce((t, r) => t + r[1], 0);
     const last30 = sum(views.slice(-30));
-    const prev30 = sum(views.slice(-60, -30));
-    const change = ((last30 - prev30) / prev30) * 100;
     const firstF = followers[0][1];
     const lastF = followers[followers.length - 1][1];
     const gained = lastF - firstF;
-    const latestMonth = data.monthly[data.monthly.length - 1];
+    const months = data.monthly.map((m) => ({ name: MONTHS[Number(m.month.slice(5)) - 1], views: m.views }));
+    const monthlyAvg = months.reduce((t, m) => t + m.views, 0) / months.length;
 
     document.getElementById("dash-range").textContent =
       "Since " + since + " · updated " + day(data.updated);
@@ -74,7 +73,7 @@
       {
         label: "Followers growth",
         value: (gained >= 0 ? "+" : "−") + full(Math.abs(gained)),
-        sub: full(firstF) + " → " + full(lastF),
+        sub: "since " + since,
         unit: "followers",
         points: followers.map(([d, v]) => ({ label: day(d), t: tday(d), value: v })),
         note: "",
@@ -82,22 +81,20 @@
       {
         label: "Views growth",
         value: full(last30),
-        sub: (change >= 0 ? "+" : "−") + Math.abs(change).toFixed(1) + "% vs prior 30 days",
+        sub: "last 30 days",
         unit: "views that day",
         points: views.map(([d, v]) => ({ label: day(d), t: tday(d), value: v })),
         note: "Views per day. The headline is the last 30 days.",
       },
       {
         label: "Monthly average views",
-        value: full(latestMonth.avgViews),
-        sub: "per reel · " + latestMonth.month,
-        unit: "average views per reel",
-        points: data.monthly.map((m) => ({
-          label: m.month, value: m.avgViews, extra: m.reels + " reels posted",
-        })),
+        value: full(monthlyAvg),
+        sub: "per month · " + months[0].name + " – " + months[months.length - 1].name,
+        unit: "total views",
+        points: months.map((m) => ({ label: m.name, value: m.views })),
         markers: true,
         allLabels: true,
-        note: "Average views per reel, by the month the reel was posted.",
+        note: "Total views on everything posted in each month. The headline is the average across the months.",
       },
     ];
   }

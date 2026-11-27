@@ -2,14 +2,18 @@
 """Rebuild data.json for the qthos.co dashboard.
 
 Usage:
-    python3 tools/build-data.py VIEWS.html FOLLOWERS.html
+    python3 tools/build-data.py VIEWS.html FOLLOWERS.html [CONTENT.csv]
 
 VIEWS.html and FOLLOWERS.html are the daily "Views by day" and "Followers by
-day" tables from the stats email. The monthly averages are not in those files,
-so the existing "monthly" block in data.json is carried over unchanged; edit it
-by hand when a new figure arrives.
+day" tables from the stats email.
+
+"monthly" in data.json is the total views on everything posted in each month.
+It is carried over unchanged unless CONTENT.csv is given: an Instagram
+"Content insights" export (about the last 30 days). Its newest publish month is
+then set to the sum of that month's Views column; older months are left alone,
+because the export only covers part of them.
 """
-import json, os, re, sys
+import csv, json, os, re, sys
 from datetime import date
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -31,7 +35,21 @@ def rows(path):
             yield cells
 
 
-def main(views_path, followers_path):
+def month_total(csv_path):
+    """(month, views) for the newest publish month in a Content insights CSV."""
+    totals = {}
+    with open(csv_path, encoding="utf-8-sig", newline="") as f:
+        for row in csv.DictReader(f):
+            month = (row.get("Publish date") or "")[:7]
+            if month:
+                totals[month] = totals.get(month, 0) + int(row.get("Views") or 0)
+    if not totals:
+        sys.exit("No rows found in the content CSV.")
+    newest = max(totals)
+    return newest, totals[newest]
+
+
+def main(views_path, followers_path, content_path=None):
     lump, views = 0, []
     for cells in rows(views_path):
         day = DAY.search(cells[0])
@@ -52,6 +70,17 @@ def main(views_path, followers_path):
     monthly = []
     if os.path.exists(OUT):
         monthly = json.load(open(OUT, encoding="utf-8")).get("monthly", [])
+
+    if content_path:
+        month, total = month_total(content_path)
+        for entry in monthly:
+            if entry["month"] == month:
+                entry["views"] = total
+                break
+        else:
+            monthly.append({"month": month, "views": total})
+        monthly.sort(key=lambda entry: entry["month"])
+        print(f"monthly: {month} set to {total:,}")
 
     data = {
         "updated": max(views[-1][0], followers[-1][0]),
@@ -75,6 +104,6 @@ def _day_before(iso):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 3:
+    if len(sys.argv) not in (3, 4):
         sys.exit(__doc__)
-    main(sys.argv[1], sys.argv[2])
+    main(*sys.argv[1:])
