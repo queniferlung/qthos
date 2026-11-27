@@ -5,7 +5,6 @@
   const svg = document.getElementById("chart-svg");
   const tip = document.getElementById("tip");
   const tiles = document.getElementById("tiles");
-  const note = document.getElementById("dash-note");
   let metrics = [];
   let current = 0;
 
@@ -67,7 +66,6 @@
     const lifetime = [{ label: day(lump.from), t: t0 - 1, value: 0, extra: "estimated total" }]
       .concat(estimated)
       .concat(views.map(([d, v]) => ({ label: day(d), t: tday(d), value: (running += v) })));
-    const estimatedTo = estimated.length;
 
     const sum = (rows) => rows.reduce((t, r) => t + r[1], 0);
     const last30 = sum(views.slice(-30));
@@ -87,8 +85,6 @@
         sub: "since " + since,
         unit: "views in total",
         points: lifetime,
-        dashedTo: estimatedTo,
-        note: day(lump.from) + " – " + day(lump.to) + " is estimated from follower growth, shown dotted.",
       },
       {
         label: "Followers growth",
@@ -96,7 +92,6 @@
         sub: "since " + since,
         unit: "followers",
         points: followers.map(([d, v]) => ({ label: day(d), t: tday(d), value: v })),
-        note: "",
       },
       {
         label: "30 days views",
@@ -104,7 +99,6 @@
         sub: "",
         unit: "views that day",
         points: views.slice(-30).map(([d, v]) => ({ label: day(d), t: tday(d), value: v })),
-        note: "",
       },
       {
         label: "Monthly average views",
@@ -114,7 +108,6 @@
         points: months.map((m) => ({ label: m.name, value: m.views })),
         markers: true,
         allLabels: true,
-        note: "Total views on everything posted in each month. The headline is the average across the months.",
       },
     ];
   }
@@ -162,7 +155,6 @@
     svg.innerHTML = "";
     svg.setAttribute("viewBox", "0 0 " + W + " " + H);
     svg.setAttribute("aria-label", m.label + ": " + m.value + (m.sub ? ", " + m.sub : ""));
-    note.textContent = m.note;
     tip.hidden = true;
 
     [0, top / 2, top].forEach((v) => {
@@ -229,5 +221,5 @@
       let timer;
       window.addEventListener("resize", () => { clearTimeout(timer); timer = setTimeout(draw, 120); });
     })
-    .catch(() => { note.textContent = "Stats could not be loaded right now."; });
+    .catch(() => { document.getElementById("dash-range").textContent = "Stats unavailable right now"; });
 })();

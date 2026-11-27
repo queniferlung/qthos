@@ -135,8 +135,6 @@ h1 {
 }
 .tip b { display: block; font-size: 19px; font-weight: 600; }
 
-.dash-note { margin: 10px 0 0; min-height: 1.4em; font-size: 15px; font-style: italic; color: var(--ink-soft); }
-
 .links {
   margin-top: 36px;
   display: flex;
