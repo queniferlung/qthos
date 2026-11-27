@@ -13,7 +13,7 @@
 <body>
 
   <div class="stage">
-    <video class="stage-video" src="media/feature-3.mp4" autoplay muted loop playsinline preload="auto" aria-hidden="true" tabindex="-1"></video>
+    <video class="stage-video" id="stage-video" src="media/feature-4.mp4" data-loop-end="9" autoplay muted loop playsinline preload="auto" aria-hidden="true" tabindex="-1"></video>
   <header class="hero">
     <section class="dash" aria-label="Instagram performance">
       <div class="dash-head">
@@ -103,6 +103,15 @@
 
   <script src="dash.js?v=20261127154133" defer></script>
   <script>
+    // The clip's last half-second is black, so restart it just before that.
+    (function () {
+      var v = document.getElementById("stage-video");
+      var end = parseFloat(v.getAttribute("data-loop-end"));
+      if (!end) return;
+      v.addEventListener("timeupdate", function () {
+        if (v.currentTime >= end) v.currentTime = 0;
+      });
+    })();
     (function () {
       var btn = document.getElementById("more-btn");
       var more = document.getElementById("more-reels");
