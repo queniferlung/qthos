@@ -1,0 +1,215 @@
+// qthos.co dashboard: four stat tiles and one line chart, drawn from data.json.
+(function () {
+  const NS = "http://www.w3.org/2000/svg";
+  const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const svg = document.getElementById("chart-svg");
+  const tip = document.getElementById("tip");
+  const tiles = document.getElementById("tiles");
+  const note = document.getElementById("dash-note");
+  let metrics = [];
+  let current = 0;
+
+  const full = (n) => Math.round(n).toLocaleString("en-US");
+  const short = (n) => {
+    if (n >= 1e6) return (n / 1e6).toFixed(n % 1e6 === 0 ? 0 : 1) + "M";
+    if (n >= 1e3) return Math.round(n / 1e3) + "K";
+    return String(Math.round(n));
+  };
+  const day = (iso) => {
+    const [, m, d] = iso.split("-").map(Number);
+    return MONTHS[m - 1] + " " + d;
+  };
+  const tday = (iso) => Date.parse(iso + "T00:00:00Z") / 864e5;
+  const el = (name, attrs, parent) => {
+    const node = document.createElementNS(NS, name);
+    for (const k in attrs) node.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(node);
+    return node;
+  };
+
+  // Round the axis top up to a clean number so the middle gridline is clean too.
+  function niceMax(v) {
+    const pow = Math.pow(10, Math.floor(Math.log10(v)));
+    for (const step of [1, 1.2, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10]) {
+      if (step * pow >= v) return step * pow;
+    }
+    return 10 * pow;
+  }
+
+  function build(data) {
+    const views = data.views;
+    const followers = data.followers;
+    const lump = data.viewsLump;
+    const since = day(data.since);
+
+    let running = lump.views;
+    const lifetime = [
+      { label: day(lump.from), t: tday(lump.from), value: 0 },
+      { label: day(lump.to), t: tday(lump.to), value: lump.views },
+    ].concat(views.map(([d, v]) => ({ label: day(d), t: tday(d), value: (running += v) })));
+
+    const sum = (rows) => rows.reduce((t, r) => t + r[1], 0);
+    const last30 = sum(views.slice(-30));
+    const prev30 = sum(views.slice(-60, -30));
+    const change = ((last30 - prev30) / prev30) * 100;
+    const firstF = followers[0][1];
+    const lastF = followers[followers.length - 1][1];
+    const gained = lastF - firstF;
+    const latestMonth = data.monthly[data.monthly.length - 1];
+
+    document.getElementById("dash-range").textContent =
+      "Since " + since + " · updated " + day(data.updated);
+
+    return [
+      {
+        label: "Lifetime views",
+        value: full(running),
+        sub: "since " + since,
+        unit: "views in total",
+        points: lifetime,
+        dashedTo: 1,
+        note: "Instagram keeps 90 days of daily data, so " + day(lump.from) + " – " + day(lump.to) +
+          " is one total (" + full(lump.views) + " views), drawn as a dotted line.",
+      },
+      {
+        label: "Followers growth",
+        value: (gained >= 0 ? "+" : "−") + full(Math.abs(gained)),
+        sub: full(firstF) + " → " + full(lastF),
+        unit: "followers",
+        points: followers.map(([d, v]) => ({ label: day(d), t: tday(d), value: v })),
+        note: "",
+      },
+      {
+        label: "Views growth",
+        value: full(last30),
+        sub: (change >= 0 ? "+" : "−") + Math.abs(change).toFixed(1) + "% vs prior 30 days",
+        unit: "views that day",
+        points: views.map(([d, v]) => ({ label: day(d), t: tday(d), value: v })),
+        note: "Views per day. The headline is the last 30 days.",
+      },
+      {
+        label: "Monthly average views",
+        value: full(latestMonth.avgViews),
+        sub: "per reel · " + latestMonth.month,
+        unit: "average views per reel",
+        points: data.monthly.map((m) => ({
+          label: m.month, value: m.avgViews, extra: m.reels + " reels posted",
+        })),
+        markers: true,
+        allLabels: true,
+        note: "Average views per reel, by the month the reel was posted.",
+      },
+    ];
+  }
+
+  function renderTiles() {
+    tiles.innerHTML = "";
+    metrics.forEach((m, i) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "tile";
+      b.setAttribute("role", "tab");
+      b.setAttribute("aria-selected", i === current ? "true" : "false");
+      b.innerHTML =
+        '<span class="tile-label"></span><span class="tile-value"></span><span class="tile-sub"></span>';
+      b.children[0].textContent = m.label;
+      b.children[1].textContent = m.value;
+      b.children[2].textContent = m.sub;
+      b.addEventListener("click", () => { current = i; renderTiles(); draw(); });
+      tiles.appendChild(b);
+    });
+  }
+
+  function draw() {
+    const m = metrics[current];
+    const pts = m.points;
+    const W = Math.max(320, svg.parentNode.clientWidth);
+    const H = Math.round(Math.min(360, Math.max(240, W * 0.42)));
+    const pad = { l: 58, r: 18, t: 14, b: 34 };
+    const iw = W - pad.l - pad.r;
+    const ih = H - pad.t - pad.b;
+    const top = niceMax(Math.max.apply(null, pts.map((p) => p.value)));
+    // Dated series sit at their true date; the monthly series is evenly spaced.
+    const pos = pts.map((p, i) => (p.t === undefined ? i : p.t));
+    const span = pos[pos.length - 1] - pos[0] || 1;
+    const x = (i) => pad.l + ((pos[i] - pos[0]) / span) * iw;
+    const nearest = (target) => {
+      let best = 0;
+      for (let i = 1; i < pos.length; i++) {
+        if (Math.abs(pos[i] - target) < Math.abs(pos[best] - target)) best = i;
+      }
+      return best;
+    };
+    const y = (v) => pad.t + ih - (v / top) * ih;
+
+    svg.innerHTML = "";
+    svg.setAttribute("viewBox", "0 0 " + W + " " + H);
+    svg.setAttribute("aria-label", m.label + ": " + m.value + ", " + m.sub);
+    note.textContent = m.note;
+    tip.hidden = true;
+
+    [0, top / 2, top].forEach((v) => {
+      el("line", { class: "grid", x1: pad.l, x2: W - pad.r, y1: y(v), y2: y(v) }, svg);
+      const t = el("text", { class: "axis-text", x: pad.l - 12, y: y(v) + 5, "text-anchor": "end" }, svg);
+      t.textContent = short(v);
+    });
+
+    const labelAt = m.allLabels
+      ? pts.map((_, i) => i)
+      : [0, nearest(pos[0] + span / 2), pts.length - 1];
+    labelAt.forEach((i, n) => {
+      const anchor = n === 0 ? "start" : n === labelAt.length - 1 ? "end" : "middle";
+      const t = el("text", { class: "axis-text", x: x(i), y: H - 8, "text-anchor": anchor }, svg);
+      t.textContent = pts[i].label;
+    });
+
+    const path = (from, to) =>
+      pts.slice(from, to + 1).map((p, k) => (k ? "L" : "M") + x(from + k).toFixed(1) + " " + y(p.value).toFixed(1)).join(" ");
+    const solidFrom = m.dashedTo || 0;
+    if (m.dashedTo) el("path", { class: "line est", d: path(0, m.dashedTo) }, svg);
+    el("path", { class: "line", d: path(solidFrom, pts.length - 1) }, svg);
+    if (m.markers) pts.forEach((p, i) => el("circle", { class: "dot", cx: x(i), cy: y(p.value), r: 5 }, svg));
+
+    const cross = el("line", { class: "cross", y1: pad.t, y2: pad.t + ih, visibility: "hidden" }, svg);
+    const dot = el("circle", { class: "dot", r: 6, visibility: "hidden" }, svg);
+
+    function move(ev) {
+      const box = svg.getBoundingClientRect();
+      const px = ((ev.clientX - box.left) / box.width) * W;
+      const i = nearest(pos[0] + ((px - pad.l) / iw) * span);
+      const p = pts[i];
+      cross.setAttribute("x1", x(i)); cross.setAttribute("x2", x(i));
+      dot.setAttribute("cx", x(i)); dot.setAttribute("cy", y(p.value));
+      cross.setAttribute("visibility", "visible"); dot.setAttribute("visibility", "visible");
+      tip.innerHTML = "<b></b><span></span>";
+      tip.firstChild.textContent = full(p.value);
+      tip.lastChild.textContent = p.label + " · " + (p.extra || m.unit);
+      tip.hidden = false;
+      const scale = box.width / W;
+      const left = x(i) * scale;
+      const flip = left > box.width / 2;
+      tip.style.left = flip ? "" : left + 12 + "px";
+      tip.style.right = flip ? box.width - left + 12 + "px" : "";
+    }
+    function leave() {
+      cross.setAttribute("visibility", "hidden"); dot.setAttribute("visibility", "hidden");
+      tip.hidden = true;
+    }
+    svg.onpointermove = move;
+    svg.onpointerdown = move;
+    svg.onpointerleave = leave;
+  }
+
+  fetch("data.json", { cache: "no-cache" })
+    .then((r) => r.json())
+    .then((data) => {
+      metrics = build(data);
+      const asked = parseInt(location.hash.slice(1), 10);
+      if (asked >= 1 && asked <= metrics.length) current = asked - 1;
+      renderTiles();
+      draw();
+      let timer;
+      window.addEventListener("resize", () => { clearTimeout(timer); timer = setTimeout(draw, 120); });
+    })
+    .catch(() => { note.textContent = "Stats could not be loaded right now."; });
+})();

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>qthos — videos by Quen</title>
+  <title>qthos</title>
   <meta name="description" content="Short videos by Quen on love, grief, purpose and human nature, told through philosophy, psychology and classical art.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,10 +14,18 @@
   <div class="meander" aria-hidden="true"></div>
 
   <header class="hero">
-    <p class="eyebrow">Videos by Quen</p>
-    <h1>qthos</h1>
-    <div class="rule" aria-hidden="true"><span></span><i>&#10022;</i><span></span></div>
-    <p class="lede">Old ideas for modern problems. Short films on love, grief, purpose and human nature, told through philosophy, psychology and classical art.</p>
+    <section class="dash" aria-label="Instagram performance">
+      <div class="dash-head">
+        <h1>@queniferlung</h1>
+        <p class="dash-range" id="dash-range"></p>
+      </div>
+      <div class="tiles" id="tiles" role="tablist" aria-label="Choose a stat"></div>
+      <div class="chart" id="chart" role="tabpanel">
+        <svg id="chart-svg" role="img"></svg>
+        <div class="tip" id="tip" hidden></div>
+      </div>
+      <p class="dash-note" id="dash-note"></p>
+    </section>
     <nav class="links">
       <a href="https://www.instagram.com/queniferlung/" target="_blank" rel="noopener">Instagram</a>
       <a href="https://quenifer.com" target="_blank" rel="noopener">QuenTalk</a>
@@ -67,5 +75,6 @@
     <p class="fine">&copy; 2026 Quen</p>
   </footer>
   <div class="meander" aria-hidden="true"></div>
+  <script src="dash.js" defer></script>
 </body>
 </html>
