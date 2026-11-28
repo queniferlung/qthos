@@ -361,3 +361,9 @@ main .more-btn:hover, main .more-btn:focus-visible { background: #fff; color: va
 
 .stage .dash-head { margin-bottom: 52px; }
 @media (max-width: 860px) { .stage .dash-head { margin-bottom: 36px; } }
+
+/* Page heading in dark green, with a soft light halo so it reads over the video */
+.stage h1 {
+  color: #1c3d2a;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.55), 0 0 2px rgba(255, 255, 255, 0.6);
+}
