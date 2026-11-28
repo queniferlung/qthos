@@ -355,7 +355,7 @@ main .more-btn:hover, main .more-btn:focus-visible { background: #fff; color: va
 .stage h1 {
   font-family: "Instrument Serif", Georgia, serif;
   font-weight: 400;
-  font-size: clamp(40px, 6vw, 60px);
+  font-size: clamp(42px, 6.3vw, 63px);
   text-align: center;
 }
 
