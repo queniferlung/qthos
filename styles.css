@@ -400,3 +400,16 @@ main .section-title { font-size: 74px; } /* 63px on screen after the section's 0
 @media (max-width: 860px) {
   main .section-title { font-size: clamp(42px, 6.3vw, 63px); }
 }
+
+/* Still-frame version of the background, used on phones that block video */
+.page-frames {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  pointer-events: none;
+  background-size: 1000% 1200%;
+  background-repeat: no-repeat;
+}

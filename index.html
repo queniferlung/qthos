@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261127174255">
+  <link rel="stylesheet" href="styles.css?v=20261127175402">
 </head>
 <body>
 
@@ -104,7 +104,7 @@
     <p class="more-wrap"><button type="button" class="more-btn" id="more-btn" aria-expanded="false" aria-controls="more-reels">See more</button></p>
   </main>
 
-  <script src="dash.js?v=20261127174255" defer></script>
+  <script src="dash.js?v=20261127175402" defer></script>
   <script>
     // The clip's last half-second is black, so restart it just before that.
     (function () {
@@ -120,12 +120,35 @@
     (function () {
       var v = document.getElementById("stage-video");
       v.muted = true;
+      // Phones in Low Power Mode refuse to play video at all. There, show the same
+      // footage as a sequence of still frames, which the phone does not block.
+      var frames = null;
+      function useFrames() {
+        if (frames || !window.matchMedia("(max-width: 860px)").matches) return;
+        var COLS = 10, ROWS = 12, N = COLS * ROWS, i = 0, dir = 1;
+        frames = document.createElement("div");
+        frames.className = "page-frames";
+        var img = new Image();
+        img.onload = function () {
+          frames.style.backgroundImage = "url(media/frames-10.jpg)";
+          document.body.insertBefore(frames, document.body.firstChild);
+          v.style.display = "none";
+          setInterval(function () {       // forwards then backwards, so the loop has no jump
+            frames.style.backgroundPosition =
+              ((i % COLS) / (COLS - 1)) * 100 + "% " + (Math.floor(i / COLS) / (ROWS - 1)) * 100 + "%";
+            if (i + dir < 0 || i + dir >= N) dir = -dir;
+            i += dir;
+          }, 100);
+        };
+        img.src = "media/frames-10.jpg";
+      }
       function start() {
         var p = v.play();
-        if (p && p.catch) p.catch(function () {});
+        if (p && p.catch) p.catch(useFrames);
       }
+      setTimeout(function () { if (v.paused || v.currentTime === 0) useFrames(); }, 1500);
       function onFirstInput() {
-        start();
+        if (!frames) start();
         ["pointerdown", "touchstart", "keydown"].forEach(function (e) {
           document.removeEventListener(e, onFirstInput);
         });
