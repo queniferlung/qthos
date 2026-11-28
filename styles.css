@@ -362,8 +362,8 @@ main .more-btn:hover, main .more-btn:focus-visible { background: #fff; color: #1
 .stage .dash-head { margin-bottom: 52px; }
 @media (max-width: 860px) { .stage .dash-head { margin-bottom: 36px; } }
 
-/* Page heading in dark green, with a soft light halo so it reads over the video */
+/* Page heading in light cream, with a thin dark edge so it reads over the video */
 .stage h1 {
-  color: #1c3d2a;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.55), 0 0 2px rgba(255, 255, 255, 0.6);
+  color: #f6ecd6; /* light cream */
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.6), 0 1px 6px rgba(0, 0, 0, 0.45);
 }
