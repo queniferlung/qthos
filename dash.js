@@ -119,6 +119,23 @@
     ];
   }
 
+  // On first load each stat shuffles through random smaller numbers, then lands on its value.
+  function shuffleIn(node, finalText, delay) {
+    const digits = finalText.replace(/\D/g, "");
+    if (!digits || (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches)) return;
+    const target = parseInt(digits, 10);
+    const prefix = (finalText.match(/^\D*/) || [""])[0];
+    const floor = Math.pow(10, digits.length - 1); // same number of digits, so the box does not jump
+    if (target <= floor) return;
+    const random = () => prefix + full(floor + Math.floor(Math.random() * (target - floor)));
+    const duration = 1100;
+    node.textContent = random();
+    // Plain timers (not animation frames), so the real value always lands even in a background tab.
+    const timer = setInterval(() => { node.textContent = random(); }, 55);
+    setTimeout(() => { clearInterval(timer); node.textContent = finalText; }, delay + duration);
+  }
+  let shuffled = false;
+
   function renderTiles() {
     tiles.innerHTML = "";
     metrics.forEach((m, i) => {
@@ -131,10 +148,12 @@
         '<span class="tile-label"></span><span class="tile-value"></span><span class="tile-sub"></span>';
       b.children[0].textContent = m.label;
       b.children[1].textContent = m.value;
+      if (!shuffled) shuffleIn(b.children[1], m.value, i * 120);
       b.children[2].textContent = m.sub || "\u00a0"; // keep tile heights equal
       b.addEventListener("click", () => { current = i; renderTiles(); draw(); });
       tiles.appendChild(b);
     });
+    shuffled = true;
   }
 
   function draw() {
