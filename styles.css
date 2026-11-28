@@ -188,7 +188,7 @@ main {
   width: min(1168px, calc(100% - 48px));
   margin: 0 auto 72px;
   padding: 48px 40px 56px;
-  background: rgba(247, 240, 226, 0.95);
+  background: rgba(247, 240, 226, 0.72);
   border-radius: 28px;
 }
 
