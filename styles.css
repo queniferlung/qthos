@@ -231,15 +231,29 @@ main {
 }
 .more-btn:hover, .more-btn:focus-visible { background: var(--ink); color: var(--parchment); }
 
-.card { display: block; text-decoration: none; text-align: center; }
+.gallery > li { container-type: inline-size; }
+
+/* Each reel is one piece: the arched thumbnail with a text box extending below it */
+.card {
+  display: block;
+  height: 100%;
+  padding-bottom: 18px;
+  text-decoration: none;
+  text-align: center;
+  background: rgba(247, 240, 226, 0.95);
+  border-radius: 50cqw 50cqw 20px 20px; /* half the card's width, so the bottom corners keep their own radius */
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+.card:hover, .card:focus-visible {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 30px -18px rgba(0, 0, 0, 0.6);
+}
+.card h3, .card .views, .card .meta { padding: 0 12px; }
 
 /* arched niche, like a framed alcove */
 .frame {
-  padding: 8px;
-  border: 1px solid var(--gold);
+  padding: 8px 8px 0;
   border-radius: 999px 999px 0 0;
-  background: var(--parchment-deep);
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 .frame img {
   display: block;
@@ -248,10 +262,6 @@ main {
   aspect-ratio: 9 / 16;
   object-fit: cover;
   border-radius: 999px 999px 0 0;
-}
-.card:hover .frame, .card:focus-visible .frame {
-  transform: translateY(-6px);
-  box-shadow: 0 18px 30px -18px rgba(42, 32, 24, 0.55);
 }
 
 .num {
@@ -295,7 +305,9 @@ footer a:hover { color: var(--terracotta); }
   .chart { padding: 16px 10px 8px 4px; border-radius: 16px; }
   .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .card h3 { font-size: 15px; }
-  .frame { padding: 5px; }
+  .frame { padding: 5px 5px 0; }
+  .card { padding-bottom: 14px; border-radius: 50cqw 50cqw 16px 16px; }
+  .card h3, .card .views, .card .meta { padding: 0 8px; }
   .rule span { width: 56px; }
   .tile { padding: 12px 12px 10px; border-radius: 14px; }
   .tile-label { font-size: 13px; }
@@ -322,11 +334,7 @@ footer a:hover { color: var(--terracotta); }
 .rule i { font-style: normal; font-size: 14px; }
 
 /* Section 2 has no panel: its text sits on the video, white with a tight dark edge */
-main .section-title,
-main .card h3,
-main .views,
-main .meta,
-main .num {
+main .section-title {
   color: #fff;
   text-shadow: 0 0 2px rgba(0, 0, 0, 0.85), 0 1px 4px rgba(0, 0, 0, 0.7);
 }
