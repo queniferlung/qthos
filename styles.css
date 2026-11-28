@@ -339,15 +339,17 @@ main .section-title {
   color: #fff;
   text-shadow: 0 0 2px rgba(0, 0, 0, 0.85), 0 1px 4px rgba(0, 0, 0, 0.7);
 }
-/* See more: a solid light box, matching the reel boxes */
+/* See more: no fill, just a border */
 main .more-btn {
-  background: #ebe6da;
-  color: #1c3d2a;
-  border-color: transparent;
+  background: transparent;
+  color: #ebe6da;
+  border: 1.5px solid #ebe6da;
   border-radius: 12px;
   font-weight: 600;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.6), 0 1px 5px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);
 }
-main .more-btn:hover, main .more-btn:focus-visible { background: #fff; color: #1c3d2a; }
+main .more-btn:hover, main .more-btn:focus-visible { background: rgba(235, 230, 218, 0.18); color: #ebe6da; }
 
 /* Page heading: centred, Instrument Serif */
 .dash-head { justify-content: center; }
@@ -372,3 +374,16 @@ main .more-btn:hover, main .more-btn:focus-visible { background: #fff; color: #1
 /* Headings share the panels' colour */
 .stage h1,
 main .section-title { color: #ebe6da; }
+
+/* View counts on the reels */
+.card .views { color: #b4863a; }
+
+/* Reels blur in as they scroll into view (only when the script has switched this on) */
+.reveal .gallery > li {
+  opacity: 0;
+  filter: blur(14px);
+  transform: translateY(14px);
+  transition: opacity 0.7s ease, filter 0.7s ease, transform 0.7s ease;
+  transition-delay: calc(var(--col, 0) * 90ms);
+}
+.reveal .gallery > li.in { opacity: 1; filter: blur(0); transform: none; }
