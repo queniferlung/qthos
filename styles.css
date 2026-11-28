@@ -342,12 +342,12 @@ main .section-title {
 /* See more: a solid light box, matching the reel boxes */
 main .more-btn {
   background: rgba(247, 240, 226, 0.95);
-  color: var(--ink);
+  color: #1c3d2a;
   border-color: transparent;
   border-radius: 12px;
   font-weight: 600;
 }
-main .more-btn:hover, main .more-btn:focus-visible { background: #fff; color: var(--ink); }
+main .more-btn:hover, main .more-btn:focus-visible { background: #fff; color: #1c3d2a; }
 
 /* Page heading: centred, Instrument Serif */
 .dash-head { justify-content: center; }
