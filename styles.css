@@ -387,10 +387,10 @@ main .section-title { color: #ebe6da; }
 }
 .reveal .gallery > li.in { opacity: 1; filter: blur(0); transform: none; }
 
-/* Both headings in Palatino (built into Macs, iPhones and Windows; other devices fall back to a similar serif) */
+/* Both headings in Helvetica, regular weight */
 .stage h1,
 main .section-title {
-  font-family: Palatino, "Palatino Linotype", "Book Antiqua", "URW Palladio L", Georgia, serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 400;
-  letter-spacing: 0;
+  letter-spacing: -0.01em;
 }
