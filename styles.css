@@ -138,9 +138,9 @@ h1 {
   font-size: 13px;
   font-variant-numeric: lining-nums;
 }
-.line { fill: none; stroke: var(--terracotta); stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
+.line { fill: none; stroke: #5f7f9e; stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
 .line.est { stroke-dasharray: 2 7; }
-.dot { fill: var(--terracotta); stroke: var(--parchment); stroke-width: 2; }
+.dot { fill: #5f7f9e; stroke: var(--parchment); stroke-width: 2; }
 .cross { stroke: var(--ink-soft); stroke-width: 1; }
 
 .tip {
@@ -181,7 +181,7 @@ h1 {
 /* Reels section at 85% on larger screens */
 @media (min-width: 861px) {
   main { zoom: 0.847; }
-  .section-title { font-size: 80px; margin-bottom: 80px; } /* keeps the heading the same size on screen */
+  .section-title { font-size: 76px; margin-bottom: 80px; } /* keeps the heading the same size on screen */
 }
 
 /* Section 2 sits on one big rounded panel over the video */
@@ -197,7 +197,7 @@ main {
   margin: 0 0 88px; /* heading sits high; the reels keep their place */
   font-family: "Instrument Serif", Georgia, serif;
   font-weight: 400; /* the font has a single weight */
-  font-size: 88px;
+  font-size: 84px;
   line-height: 1.05;
   letter-spacing: 0;
   text-align: center;
@@ -313,7 +313,7 @@ footer a:hover { color: var(--terracotta); }
   .tile { padding: 12px 12px 10px; border-radius: 14px; }
   .tile-label { font-size: 13px; }
   .tile-value { font-size: 20px; }
-  .section-title { font-size: 50px; margin-bottom: 52px; }
+  .section-title { font-size: 47px; margin-bottom: 52px; }
   main { width: calc(100% - 24px); margin: 0 auto 40px; padding: 8px 14px 36px; border-radius: 22px; }
   .gallery-more { margin-top: 32px; }
   .more-wrap { margin-top: 36px; }
