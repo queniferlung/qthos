@@ -65,11 +65,14 @@
     const estimated = weights.map((w, i) => {
       share += w + floor;
       const d = new Date((t0 + i) * 864e5).toISOString().slice(0, 10);
-      return { label: day(d), t: t0 + i, value: (lumpViews * share) / totalWeight, extra: "estimated total" };
+      return {
+        label: day(d), t: t0 + i, value: (lumpViews * share) / totalWeight,
+        tipValue: (lumpViews * (w + floor)) / totalWeight,
+      };
     });
-    const lifetime = [{ label: day(lump.from), t: t0 - 1, value: 0, extra: "estimated total" }]
-      .concat(estimated)
-      .concat(views.map(([d, v]) => ({ label: day(d), t: tday(d), value: (running += v) })));
+    // The line is the running total; hovering shows that day's own views.
+    const lifetime = estimated
+      .concat(views.map(([d, v]) => ({ label: day(d), t: tday(d), value: (running += v), tipValue: v })));
 
     const sum = (rows) => rows.reduce((t, r) => t + r[1], 0);
     const last30 = sum(views.slice(-30));
@@ -87,7 +90,7 @@
         label: "Lifetime views",
         value: data.lifetimeLabel || full(running),
         sub: "since " + since,
-        unit: "views in total",
+        unit: "daily views",
         points: lifetime,
       },
       {
@@ -195,7 +198,7 @@
       dot.setAttribute("cx", x(i)); dot.setAttribute("cy", y(p.value));
       cross.setAttribute("visibility", "visible"); dot.setAttribute("visibility", "visible");
       tip.innerHTML = "<b></b><span></span>";
-      tip.firstChild.textContent = full(p.value);
+      tip.firstChild.textContent = full(p.tipValue === undefined ? p.value : p.tipValue);
       tip.lastChild.textContent = p.label + " · " + (p.extra || m.unit);
       tip.hidden = false;
       // Layout pixels, not screen pixels, so this stays right when the page is zoomed.
