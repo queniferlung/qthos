@@ -396,7 +396,7 @@ main .section-title {
   text-shadow: 0 1px 10px rgba(0, 0, 0, 0.28), 0 0 1px rgba(0, 0, 0, 0.25);
 }
 .stage h1 { font-size: clamp(42px, 6.3vw, 63px); }
-main .section-title { font-size: 58px; }
+main .section-title { font-size: 74px; } /* 63px on screen after the section's 0.847 scale: same as the page heading */
 @media (max-width: 860px) {
-  main .section-title { font-size: 36px; }
+  main .section-title { font-size: clamp(42px, 6.3vw, 63px); }
 }
