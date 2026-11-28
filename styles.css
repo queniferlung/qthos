@@ -413,3 +413,13 @@ main .section-title { font-size: 74px; } /* 63px on screen after the section's 0
   background-size: 1000% 1200%;
   background-repeat: no-repeat;
 }
+
+/* See More in Instrument Serif, title case */
+main .more-btn {
+  font-family: "Instrument Serif", Georgia, serif;
+  font-weight: 400;
+  font-size: 26px;
+  letter-spacing: 0;
+  text-transform: none;
+  padding: 10px 34px 12px;
+}
