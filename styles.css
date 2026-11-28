@@ -41,14 +41,13 @@ a { color: inherit; }
 
 /* Section 1: stats */
 .stage { position: relative; margin-bottom: 40px; }
-/* The heading sits on its own light bar so it reads over any video */
-.stage .dash-head {
-  align-items: center;
-  padding: 12px 18px;
-  margin-bottom: 12px;
-  background: rgba(247, 240, 226, 0.94);
-  border-radius: 18px;
+/* Heading straight on the video: white with a tight dark edge so it reads on bright or dark footage */
+.stage h1,
+.stage .dash-range {
+  color: #fff;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.85), 0 1px 4px rgba(0, 0, 0, 0.7);
 }
+.stage .dash-range { font-weight: 500; }
 .stage .tile { background: rgba(247, 240, 226, 0.94); }
 .stage .tile:hover { background: #fff8ea; }
 .stage .chart { background: rgba(251, 247, 238, 0.96); border-color: transparent; }
