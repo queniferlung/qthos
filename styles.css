@@ -271,7 +271,7 @@ main {
   font-size: 14px;
   letter-spacing: 0.08em;
   font-variant-numeric: lining-nums;
-  color: var(--terracotta);
+  color: #54647a; /* the blue of the sky in the background video */
 }
 .card h3 {
   margin: 0;
