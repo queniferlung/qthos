@@ -37,6 +37,7 @@ a { color: inherit; }
   object-fit: cover;
   z-index: -1;
   pointer-events: none;
+  filter: brightness(1.22) saturate(1.08); /* lift the clip: it is shot dark */
 }
 
 /* Section 1: stats */
@@ -175,9 +176,9 @@ h1 {
 .links a:hover, .links a:focus-visible { background: var(--ink); color: var(--parchment); }
 
 /* Gallery */
-/* Reels section at 70% on larger screens */
+/* Reels section at 77% on larger screens */
 @media (min-width: 861px) {
-  main { zoom: 0.7; }
+  main { zoom: 0.77; }
 }
 
 /* Section 2 sits on one big rounded panel over the video */
