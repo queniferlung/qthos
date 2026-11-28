@@ -6,6 +6,7 @@
   const tip = document.getElementById("tip");
   const tiles = document.getElementById("tiles");
   let metrics = [];
+  const revealed = new Set(); // graphs that have already played their draw-in
   let current = 0;
 
   const full = (n) => Math.round(n).toLocaleString("en-US");
@@ -202,8 +203,31 @@
       pts.slice(from, to + 1).map((p, k) => (k ? "L" : "M") + x(from + k).toFixed(1) + " " + y(p.value).toFixed(1)).join(" ");
     const solidFrom = m.dashedTo || 0;
     if (m.dashedTo) el("path", { class: "line est", d: path(0, m.dashedTo) }, svg);
-    el("path", { class: "line", d: path(solidFrom, pts.length - 1) }, svg);
-    if (m.markers) pts.forEach((p, i) => el("circle", { class: "dot", cx: x(i), cy: y(p.value), r: 5 }, svg));
+    const line = el("path", { class: "line", d: path(solidFrom, pts.length - 1) }, svg);
+    const dots = m.markers
+      ? pts.map((p, i) => el("circle", { class: "dot", cx: x(i), cy: y(p.value), r: 5 }, svg))
+      : [];
+
+    // The first time a graph is shown, its line draws in from left to right. After that it is static.
+    if (!revealed.has(current)) {
+      revealed.add(current);
+      const still = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (!still && line.getTotalLength) {
+        const length = line.getTotalLength();
+        const duration = 1300;
+        line.style.strokeDasharray = length;
+        line.style.strokeDashoffset = length;
+        dots.forEach((d) => { d.style.opacity = 0; });
+        line.getBoundingClientRect(); // apply the start state before animating
+        line.style.transition = "stroke-dashoffset " + duration + "ms ease-in-out";
+        line.style.strokeDashoffset = 0;
+        dots.forEach((d, i) => {
+          d.style.transition = "opacity 250ms ease " + Math.round((i / Math.max(1, dots.length - 1)) * duration) + "ms";
+          d.style.opacity = 1;
+        });
+        setTimeout(() => { line.style.transition = ""; line.style.strokeDasharray = ""; line.style.strokeDashoffset = ""; }, duration + 100);
+      }
+    }
 
     const cross = el("line", { class: "cross", y1: pad.t, y2: pad.t + ih, visibility: "hidden" }, svg);
     const dot = el("circle", { class: "dot", r: 6, visibility: "hidden" }, svg);
