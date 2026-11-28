@@ -387,10 +387,16 @@ main .section-title { color: #ebe6da; }
 }
 .reveal .gallery > li.in { opacity: 1; filter: blur(0); transform: none; }
 
-/* Both headings in Helvetica, regular weight */
+/* Both headings in Instrument Serif, with a soft shadow */
 .stage h1,
 main .section-title {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: 400;
-  letter-spacing: -0.01em;
+  font-family: "Instrument Serif", Georgia, serif;
+  font-weight: 400; /* the font has a single weight */
+  letter-spacing: 0;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.28), 0 0 1px rgba(0, 0, 0, 0.25);
+}
+.stage h1 { font-size: clamp(42px, 6.3vw, 63px); }
+main .section-title { font-size: 58px; }
+@media (max-width: 860px) {
+  main .section-title { font-size: 36px; }
 }
